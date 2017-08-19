@@ -33,6 +33,10 @@ public class ChunkPos {
         this.z = z;
     }
 
+    public boolean matches(ChunkPos pos2) {
+        return (x == pos2.getX() && y == pos2.getY() && z == pos2.getZ());
+    }
+
     public static ChunkPos fromPos3D(Pos3D pos3D) {
         return new ChunkPos(((int)pos3D.getX())/16, ((int)pos3D.getY())/16, ((int)pos3D.getZ())/16);
     }

@@ -1,5 +1,6 @@
 package com.anzanama.lwjgl3d.World;
 
+import com.anzanama.lwjgl3d.World.Change.CreateChunkWC;
 import com.anzanama.lwjgl3d.World.Change.WorldChangeScheduler;
 import com.anzanama.lwjgl3d.World.Position.ChunkPos;
 import com.anzanama.lwjgl3d.World.Position.Pos3D;
@@ -26,20 +27,16 @@ public class World {
     }
 
     public Chunk getChunk(ChunkPos pos) {
-        return chunkMap.get(pos);
+        if(chunkMap.containsKey(pos)) {
+            return chunkMap.get(pos);
+        } else {
+            WorldProvider.createChunkAtPos(pos, this);
+            return chunkMap.get(pos);
+        }
     }
 
     public WorldChangeScheduler getChangeScheduler() {
         return this.changeScheduler;
-    }
-
-    public Chunk getChunkFromPos3D(Pos3D pos) {
-        ChunkPos pos2 = new ChunkPos(((int)pos.getX())/16, ((int)pos.getY())/16, ((int)pos.getZ())/16);
-        if(chunkMap.containsKey(pos2)) {
-            return chunkMap.get(pos2);
-        } else {
-            return WorldProvider.createChunkAtPos(pos2, this);
-        }
     }
 
     public void addChunk(ChunkPos pos, Chunk chunk) {

@@ -57,7 +57,7 @@ public class Game {
             Map.Entry<ChunkPos, Chunk> item = it.next();
             ArrayList<GameObject> chunkObjects = item.getValue().getObjects();
             for(GameObject obj : chunkObjects) {
-                obj.update();
+                obj.render();
             }
         }
 

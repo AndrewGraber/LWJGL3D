@@ -1,5 +1,6 @@
 package com.anzanama.lwjgl3d.GameObject;
 
+import com.anzanama.lwjgl3d.World.Position.ChunkPos;
 import com.anzanama.lwjgl3d.World.Position.Pos3D;
 import com.anzanama.lwjgl3d.World.World;
 
@@ -12,7 +13,7 @@ public class EmptyObject extends GameObject {
     public EmptyObject(Pos3D pos, World world, ArrayList<GameObject> children) {
         this.pos = pos;
         this.children = children;
-        world.getChunkFromPos3D(this.pos).addGameObject(this);
+        world.getChunk(ChunkPos.fromPos3D(pos)).addGameObject(this);
     }
 
     public EmptyObject(Pos3D pos, World world, GameObject... children) {
@@ -21,7 +22,7 @@ public class EmptyObject extends GameObject {
         for(GameObject obj : children) {
             this.children.add(obj);
         }
-        world.getChunkFromPos3D(this.pos).addGameObject(this);
+        world.getChunk(ChunkPos.fromPos3D(pos)).addGameObject(this);
     }
 
     public EmptyObject(World world, GameObject... children) {
@@ -30,7 +31,7 @@ public class EmptyObject extends GameObject {
         for(GameObject obj : children) {
             this.children.add(obj);
         }
-        world.getChunkFromPos3D(this.pos).addGameObject(this);
+        world.getChunk(ChunkPos.fromPos3D(pos)).addGameObject(this);
     }
 
     public EmptyObject(Pos3D pos, World world) {
@@ -43,12 +44,12 @@ public class EmptyObject extends GameObject {
 
     @Override
     public Pos3D getPos() {
-        return null;
+        return pos;
     }
 
     @Override
     public void setPos(Pos3D pos) {
-
+        this.pos = pos;
     }
 
     @Override

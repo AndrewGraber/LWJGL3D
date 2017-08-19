@@ -37,7 +37,7 @@ public class PlayerObject extends EmptyObject {
     }
 
     public void updateMovement() {
-        Chunk prevChunk = world.getChunkFromPos3D(pos);
+        ChunkPos prevPos = ChunkPos.fromPos3D(pos);
 
         if(input.getInput("forward") && !input.getInput("back")) {
             moveForward(SPEED);
@@ -52,20 +52,22 @@ public class PlayerObject extends EmptyObject {
             strafeRight(SPEED);
         }
         if(input.getInput("jump") && !input.getInput("sneak")) {
-            getPos().getLoc().addY(SPEED);
-        }
-        if(input.getInput("sneak") && !input.getInput("jump")) {
             getPos().getLoc().addY(-SPEED);
         }
+        if(input.getInput("sneak") && !input.getInput("jump")) {
+            getPos().getLoc().addY(SPEED);
+        }
         if(input.getInput("mouse_x")) {
-            camera.getPos().getRot().addYaw(((float) Mouse.getDX())*camera.getSensitivity());
+            System.out.println("MOUSE X: " + Mouse.getDX());
+            camera.getPos().getRot().addYaw(((float)input.pullMouseDX())*camera.getSensitivity());
         }
         if(input.getInput("mouse_y")) {
-            camera.getPos().getRot().addPitch(-((float)Mouse.getDY())*camera.getSensitivity());
+            System.out.println("MOUSE Y");
+            camera.getPos().getRot().addPitch(-((float)input.pullMouseDY())*camera.getSensitivity());
         }
 
-        if(!world.getChunkFromPos3D(pos).equals(prevChunk)) {
-            world.getChangeScheduler().addChange(new SwitchChunksWC(prevChunk.getPos(), ChunkPos.fromPos3D(pos), this));
+        if(!ChunkPos.fromPos3D(pos).matches(prevPos)) {
+            world.getChangeScheduler().addChange(new SwitchChunksWC(prevPos, ChunkPos.fromPos3D(pos), this));
         }
     }
 

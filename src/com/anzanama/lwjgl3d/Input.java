@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class Input {
     private HashMap<String, Boolean> input;
+    private int mouseDX, mouseDY;
 
     public Input() {
         input = new HashMap<>();
@@ -18,6 +19,8 @@ public class Input {
         input.put("sneak", false);
         input.put("mouse_x", false);
         input.put("mouse_y", false);
+        this.mouseDX = 0;
+        this.mouseDY = 0;
     }
 
     public void updateInput() {
@@ -40,12 +43,16 @@ public class Input {
             input.put("sneak", true);
         else input.put("sneak", false);
 
-        if(Mouse.getDX() != 0) {
+        int temp = Mouse.getDX();
+        if(temp != 0) {
             input.put("mouse_x", true);
+            this.mouseDX = temp;
         } else input.put("mouse_x", false);
 
-        if(Mouse.getDY() != 0) {
+        temp = Mouse.getDY();
+        if(temp != 0) {
             input.put("mouse_y", true);
+            this.mouseDY = temp;
         } else input.put("mouse_y", false);
     }
 
@@ -55,5 +62,17 @@ public class Input {
         } else {
             return false;
         }
+    }
+
+    public int pullMouseDX() {
+        int temp = this.mouseDX;
+        this.mouseDX = 0;
+        return temp;
+    }
+
+    public int pullMouseDY() {
+        int temp = this.mouseDY;
+        this.mouseDY = 0;
+        return temp;
     }
 }

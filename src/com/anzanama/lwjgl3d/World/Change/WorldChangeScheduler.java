@@ -19,7 +19,8 @@ public class WorldChangeScheduler {
     }
 
     public void makeChanges(World world) {
-        while(changeStack.peek() != null) {
+        while(changeStack.size() != 0) {
+            System.out.println("Making World Change");
             WorldChange change = changeStack.pop();
             change.makeChange(world);
         }
