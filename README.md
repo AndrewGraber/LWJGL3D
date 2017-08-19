@@ -18,3 +18,8 @@ There's one more thing you'll have to do to get it to run.
 
 Now, you should be good to run the program. I'm not sure how this process compares in other IDEs, but I imagine it's similar. Maybe at some point, I'll go through Eclipse and NetBeans and make guides for them too.
 
+## Documentation
+Once I get a bit further along in working on the larger parts of this and closer to being able to push out a first major release, I'll begin working on documentation. This will probably come in the form of javadocs, as well as a wiki on this repo.
+
+## Helping Out
+If you'd like to help out with the project, feel free to submit a pull request. This is no guarantee that I'll accept it, but so long as your changes help the project along, I'll probably accept them. If you want to work with me directly and help out with code/documentation/etc., you can contact me via Discord (AnZaNaMa \#3242) or email me at recovery22306@gmail.com
