@@ -11,7 +11,7 @@ public class CameraObject extends EmptyObject {
     public static final float DEFAULT_ASPECT = 800.0f/600.0f;
     public static final float DEFAULT_NEAR_CLIP = 0.3f;
     public static final float DEFAULT_RENDER_DISTANCE = 1000;
-    public static final float DEFAULT_SENSITIVITY = 0.5f;
+    public static final float DEFAULT_SENSITIVITY = 0.25f;
 
     private float fov; //Field of View angle (degrees)
     private float aspectRatio; //The camera's aspect ratio (width to height)

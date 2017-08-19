@@ -58,11 +58,9 @@ public class PlayerObject extends EmptyObject {
             getPos().getLoc().addY(SPEED);
         }
         if(input.getInput("mouse_x")) {
-            System.out.println("MOUSE X: " + Mouse.getDX());
             camera.getPos().getRot().addYaw(((float)input.pullMouseDX())*camera.getSensitivity());
         }
         if(input.getInput("mouse_y")) {
-            System.out.println("MOUSE Y");
             camera.getPos().getRot().addPitch(-((float)input.pullMouseDY())*camera.getSensitivity());
         }
 
