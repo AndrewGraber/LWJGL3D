@@ -1,6 +1,7 @@
 package com.anzanama.lwjgl3d.Game;
 
 import com.anzanama.lwjgl3d.GameObject.GameObject;
+import com.anzanama.lwjgl3d.GameObject.TestCubeObject;
 import com.anzanama.lwjgl3d.Input;
 import com.anzanama.lwjgl3d.GameObject.PlayerObject;
 import com.anzanama.lwjgl3d.World.Chunk;
@@ -19,11 +20,15 @@ public class Game {
     private PlayerObject player;
     private World world;
     private Input input;
+    private TestCubeObject cube1, cube2, cube3;
 
     public void initialize() {
         world = WorldProvider.createNewWorld("world");
         input = new Input();
         player = new PlayerObject(new Pos3D(), world, input);
+        cube1 = new TestCubeObject(new Pos3D(0, 0, -10), world);
+        cube2 = new TestCubeObject(new Pos3D(-2, 0, -8), world);
+        cube3 = new TestCubeObject(new Pos3D(3, 0, -4), world);
     }
 
     public void loop() {
@@ -60,58 +65,6 @@ public class Game {
                 obj.render();
             }
         }
-
-        glPushMatrix();
-        glTranslatef(0, 0, -10);
-        glRotatef(20, 1, 0, 0);
-        glBegin(GL_QUADS);
-        {
-            //Back Face
-            glColor3f(1.0f, 0f, 0f);
-            glVertex3f(-1, -1, -1);
-            glVertex3f(-1, 1, -1);
-            glVertex3f(1, 1, -1);
-            glVertex3f(1, -1, -1);
-
-            //Right Face
-            glColor3f(0f, 0f, 1.0f);
-            glVertex3f(1, -1, -1);
-            glVertex3f(1, -1, 1);
-            glVertex3f(1, 1, 1);
-            glVertex3f(1, 1, -1);
-
-            //Top Face
-            glColor3f(1.0f, 0f, 1.0f);
-            glVertex3f(-1, 1, -1);
-            glVertex3f(1, 1, -1);
-            glVertex3f(1, 1, 1);
-            glVertex3f(-1, 1, 1);
-
-            //Left Face
-            glColor3f(0f, 1.0f, 0f);
-            glVertex3f(-1, -1, -1);
-            glVertex3f(-1, -1, 1);
-            glVertex3f(-1, 1, 1);
-            glVertex3f(-1, 1, -1);
-
-            //Bottom Face
-            glColor3f(0f, 1.0f, 1.0f);
-            glVertex3f(-1, -1, -1);
-            glVertex3f(1, -1, -1);
-            glVertex3f(1, -1, 1);
-            glVertex3f(-1, -1, 1);
-
-            //Front Face
-            glColor3f(1.0f, 0.5f, 0f);
-            glVertex3f(-1, -1, 1);
-            glVertex3f(-1, 1, 1);
-            glVertex3f(1, 1, 1);
-            glVertex3f(1, -1, 1);
-        }
-        glEnd();
-        glPopMatrix();
-        Display.update();
-        Display.sync(60);
     }
 
     public void shutdown() {
