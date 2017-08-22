@@ -1,15 +1,21 @@
 package com.anzanama.lwjgl3d.Game;
 
+import com.anzanama.lwjgl3d.GameObject.CameraObject;
 import com.anzanama.lwjgl3d.GameObject.GameObject;
-import com.anzanama.lwjgl3d.GameObject.TestCubeObject;
+import com.anzanama.lwjgl3d.GameObject.ModeledObject;
 import com.anzanama.lwjgl3d.Input;
-import com.anzanama.lwjgl3d.GameObject.PlayerObject;
+import com.anzanama.lwjgl3d.Render.DisplayManager;
+import com.anzanama.lwjgl3d.Render.Model.*;
+import com.anzanama.lwjgl3d.Render.Shader.StaticShader;
+import com.anzanama.lwjgl3d.Render.Texture.ModelTexture;
+import com.anzanama.lwjgl3d.Util.Math;
 import com.anzanama.lwjgl3d.World.Chunk;
 import com.anzanama.lwjgl3d.World.Position.ChunkPos;
 import com.anzanama.lwjgl3d.World.Position.Pos3D;
 import com.anzanama.lwjgl3d.World.World;
 import com.anzanama.lwjgl3d.World.WorldProvider;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 
 import java.util.*;
 
@@ -17,18 +23,27 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Game {
     public boolean stopGameFlag;
-    private PlayerObject player;
+    private ModelLoader modelLoader;
+    private ModelRenderer modelRenderer;
+    private StaticShader shader;
     private World world;
     private Input input;
-    private TestCubeObject cube1, cube2, cube3;
+
+    private CameraObject camera;
+    private ModeledObject object;
 
     public void initialize() {
         world = WorldProvider.createNewWorld("world");
         input = new Input();
-        player = new PlayerObject(new Pos3D(), world, input);
-        cube1 = new TestCubeObject(new Pos3D(0, 0, -10), world);
-        cube2 = new TestCubeObject(new Pos3D(-2, 0, -8), world);
-        cube3 = new TestCubeObject(new Pos3D(3, 0, -4), world);
+        modelLoader = new ModelLoader();
+        shader = new StaticShader();
+        modelRenderer = new ModelRenderer(shader);
+        camera = new CameraObject(input);
+
+        RawModel model = OBJLoader.loadObj("stall", modelLoader);
+        ModelTexture texture = new ModelTexture(modelLoader.loadTexture("stallTexture"));
+        TexturedModel texturedModel = new TexturedModel(model, texture);
+        object = new ModeledObject(texturedModel, new Pos3D(0, 0, -50, 0, 180, 0), world, shader);
     }
 
     public void loop() {
@@ -39,6 +54,8 @@ public class Game {
     }
 
     public void update() {
+        camera.update();
+
         HashMap<ChunkPos, Chunk> chunkMap = world.getChunkMap();
         Iterator<Map.Entry<ChunkPos, Chunk>> it = chunkMap.entrySet().iterator();
         while(it.hasNext()) {
@@ -53,8 +70,12 @@ public class Game {
     }
 
     public void render() {
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glLoadIdentity();
+        glClearColor(0.3f, 0.3f, 0.3f, 1);
+
+        shader.start();
+        shader.loadViewMatrix(Math.createViewMatrix(camera.getPos()));
 
         HashMap<ChunkPos, Chunk> chunkMap = world.getChunkMap();
         Iterator<Map.Entry<ChunkPos, Chunk>> it = chunkMap.entrySet().iterator();
@@ -65,9 +86,16 @@ public class Game {
                 obj.render();
             }
         }
+
+        DisplayManager.updateDisplay();
     }
 
     public void shutdown() {
+        shader.cleanUp();
+        modelLoader.cleanUp();
+    }
 
+    public ModelRenderer getModelRenderer() {
+        return modelRenderer;
     }
 }

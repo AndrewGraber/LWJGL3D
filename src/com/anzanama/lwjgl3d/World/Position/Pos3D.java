@@ -10,29 +10,35 @@ public class Pos3D {
     //Instance Variables
     private Loc3D loc;
     private Rot3D rot;
+    private float scale;
 
     /** Begin Constructors */
-    public Pos3D(Loc3D pos, Rot3D rot) {
+    public Pos3D(Loc3D pos, Rot3D rot, float scale) {
         this.loc = pos;
         this.rot = rot;
+        this.scale = scale;
+    }
+
+    public Pos3D(Loc3D pos, Rot3D rot) {
+        this(pos, rot, 1.0f);
     }
 
     public Pos3D(float x, float y, float z, float pitch, float yaw, float roll) {
-        this(new Loc3D(x, y, z), new Rot3D(pitch, yaw, roll));
+        this(new Loc3D(x, y, z), new Rot3D(pitch, yaw, roll), 1.0f);
     }
 
     public Pos3D(float x, float y, float z) {
-        this(new Loc3D(x, y, z), new Rot3D());
+        this(new Loc3D(x, y, z), new Rot3D(), 1.0f);
     }
 
     //Copy Constructor
     public Pos3D(Pos3D pos1) {
-        this(new Loc3D(pos1.getLoc()), new Rot3D(pos1.getRot()));
+        this(new Loc3D(pos1.getLoc()), new Rot3D(pos1.getRot()), pos1.getScale());
     }
 
     //Default Constructor
     public Pos3D() {
-        this(new Loc3D(), new Rot3D());
+        this(new Loc3D(), new Rot3D(), 1.0f);
     }
     /** End Constructors */
 
@@ -51,6 +57,14 @@ public class Pos3D {
 
     public void setRot(Rot3D rot1) {
         this.rot = rot1;
+    }
+
+    public float getScale() {
+        return scale;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
     }
 
     /* The following 6 methods (getters and setters for location) are provided

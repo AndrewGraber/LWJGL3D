@@ -1,6 +1,7 @@
 package com.anzanama.lwjgl3d;
 
 import com.anzanama.lwjgl3d.Game.Game;
+import com.anzanama.lwjgl3d.Render.DisplayManager;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -8,30 +9,33 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
 public class Main {
+    private static Game game;
+
     public static void main(String[] args) {
-        initDisplay();
-        Game game = new Game();
+        DisplayManager.createDisplay();
+
+        try {
+            Keyboard.create();
+            Mouse.create();
+            Mouse.setGrabbed(true);
+        } catch (LWJGLException e) {
+            e.printStackTrace();
+        }
+
+        game = new Game();
         game.initialize();
         game.loop();
         game.shutdown();
         cleanUp();
     }
 
-    public static void initDisplay() {
-        try {
-            Display.setDisplayMode(new DisplayMode(800, 600));
-            Display.create();
-            Keyboard.create();
-            Mouse.create();
-            Mouse.setGrabbed(true);
-        } catch(LWJGLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void cleanUp() {
-        Display.destroy();
+        DisplayManager.closeDisplay();
         Keyboard.destroy();
         Mouse.destroy();
+    }
+
+    public static Game getGame() {
+        return game;
     }
 }

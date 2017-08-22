@@ -1,72 +1,46 @@
 package com.anzanama.lwjgl3d.GameObject;
 
+import com.anzanama.lwjgl3d.Input;
 import com.anzanama.lwjgl3d.World.Position.Pos3D;
 import com.anzanama.lwjgl3d.World.World;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
 
-public class CameraObject extends EmptyObject {
-    public static final float DEFAULT_FOV = 70;
-    public static final float DEFAULT_ASPECT = 800.0f/600.0f;
-    public static final float DEFAULT_NEAR_CLIP = 0.3f;
-    public static final float DEFAULT_RENDER_DISTANCE = 1000;
+public class CameraObject extends GameObject {
     public static final float DEFAULT_SENSITIVITY = 0.25f;
+    private static final float SPEED = 0.1f;
 
-    private float fov; //Field of View angle (degrees)
-    private float aspectRatio; //The camera's aspect ratio (width to height)
-    private float nearClip; //The distance from the camera's location to clip
-    private float renderDistance; //The furthest point something will be rendered
+    private Pos3D pos;
+    private Input input;
     private float sensitivity;
 
-    public CameraObject(Pos3D pos, World world, float fov, float aspectRatio, float nearClip, float renderDistance, float sensitivity) {
-        super(pos, world);
+    public CameraObject(Pos3D pos, Input input, float sensitivity) {
         this.pos = pos;
-        this.fov = fov;
-        this.aspectRatio = aspectRatio;
-        this.nearClip = nearClip;
-        this.renderDistance = renderDistance;
+        this.input = input;
         this.sensitivity = sensitivity;
-        initProjection();
     }
 
-    public CameraObject(World world, float fov, float aspectRatio, float nearClip, float renderDistance, float sensitivity) {
-        this(new Pos3D(), world, fov, aspectRatio, nearClip, renderDistance, sensitivity);
+    public CameraObject(Input input, float sensitivity) {
+        this(new Pos3D(), input, sensitivity);
     }
 
-    public CameraObject(World world, Pos3D pos) {
-        this(pos, world, DEFAULT_FOV, DEFAULT_ASPECT, DEFAULT_NEAR_CLIP, DEFAULT_RENDER_DISTANCE, DEFAULT_SENSITIVITY);
+    public CameraObject(Pos3D pos, Input input) {
+        this(pos, input, DEFAULT_SENSITIVITY);
     }
 
-    public CameraObject(World world, float sensitivity) {
-        this(new Pos3D(), world, DEFAULT_FOV, DEFAULT_ASPECT, DEFAULT_NEAR_CLIP, DEFAULT_RENDER_DISTANCE, sensitivity);
-    }
-
-    public CameraObject(World world) {
-        this(new Pos3D(), world, DEFAULT_FOV, DEFAULT_ASPECT, DEFAULT_NEAR_CLIP, DEFAULT_RENDER_DISTANCE, DEFAULT_SENSITIVITY);
+    public CameraObject(Input input) {
+        this(new Pos3D(), input, DEFAULT_SENSITIVITY);
     }
 
     @Override
-    public void render() {
-        super.render();
-        updateView();
+    public void update() {
+        input.updateInput();
+        updateMovement();
     }
 
-    private void initProjection() {
-        glMatrixMode(GL_PROJECTION); //Set active matrix to projection matrix
-        glLoadIdentity(); //Clear the matrix completely
-        gluPerspective(fov, aspectRatio, nearClip, renderDistance); //Sets up the perspective projection
-        glMatrixMode(GL_MODELVIEW); //Switch back to Modelview Matrix
-        glEnable(GL_DEPTH_TEST); //Enables Depth Calculations to determine what to render in front
-    }
-
-    public void updateView() {
-        glRotatef(pos.getRot().getPitch(), 1, 0, 0);
-        glRotatef(pos.getRot().getYaw(), 0, 1, 0);
-        glRotatef(pos.getRot().getRoll(), 0, 0, 1);
-
-        glTranslatef(pos.getX(), pos.getY(), pos.getZ());
-    }
+    @Override
+    public void render() {}
 
     public Pos3D getPos() {
         return pos;
@@ -78,5 +52,50 @@ public class CameraObject extends EmptyObject {
 
     public float getSensitivity() {
         return sensitivity;
+    }
+
+    public void updateMovement() {
+        if(input.getInput("forward") && !input.getInput("back")) {
+            moveForward(SPEED);
+        }
+        if(input.getInput("back") && !input.getInput("forward")) {
+            moveBack(SPEED);
+        }
+        if(input.getInput("left") && !input.getInput("right")) {
+            strafeLeft(SPEED);
+        }
+        if(input.getInput("right") && !input.getInput("left")) {
+            strafeRight(SPEED);
+        }
+        if(input.getInput("jump") && !input.getInput("sneak")) {
+            getPos().getLoc().addY(SPEED);
+        }
+        if(input.getInput("sneak") && !input.getInput("jump")) {
+            getPos().getLoc().addY(-SPEED);
+        }
+        if(input.getInput("mouse_x")) {
+            getPos().getRot().addYaw(((float)input.pullMouseDX())*getSensitivity());
+        }
+        if(input.getInput("mouse_y")) {
+            getPos().getRot().addPitch(-((float)input.pullMouseDY())*getSensitivity());
+        }
+    }
+
+    public void moveBack(float amt) {
+        pos.getLoc().addZ((float)(amt * Math.sin(Math.toRadians(pos.getRot().getYaw() + 90))));
+        pos.getLoc().addX((float)(amt * Math.cos(Math.toRadians(pos.getRot().getYaw() + 90))));
+    }
+
+    public void moveForward(float amt) {
+        moveBack(-amt);
+    }
+
+    public void strafeRight(float amt) {
+        pos.getLoc().addZ((float)(amt * Math.sin(Math.toRadians(pos.getRot().getYaw()))));
+        pos.getLoc().addX((float)(amt * Math.cos(Math.toRadians(pos.getRot().getYaw()))));
+    }
+
+    public void strafeLeft(float amt) {
+        strafeRight(-amt);
     }
 }

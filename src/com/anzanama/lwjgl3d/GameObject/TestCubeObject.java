@@ -66,7 +66,5 @@ public class TestCubeObject extends EmptyObject {
         }
         glEnd();
         glPopMatrix();
-        Display.update();
-        Display.sync(60);
     }
 }
