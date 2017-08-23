@@ -1,0 +1,33 @@
+plugins {
+    id 'com.stehno.natives' version '0.3.1'
+}
+
+apply plugin: 'java'
+
+project.ext.lwjglVersion = '2.9.1'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+group = 'com.anzanama.lwjgl3d'
+version = '1.0-snapshot'
+
+natives {
+    outputDir = 'libs/natives'
+}
+
+jar {
+    manifest.attributes 'Main-Class': 'com.anzanama.lwjgl3d.Main'
+    manifest.attributes 'Class-Path': 'libs/lwjgl/lwjgl.jar libs/lwjgl/lwjgl_util.jar libs/slick-util/slick-util.jar'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.lwjgl.lwjgl:lwjgl:${lwjglVersion}"
+    compile "org.lwjgl.lwjgl:lwjgl_util:${lwjglVersion}"
+    compile "org.lwjgl.lwjgl:lwjgl-platform:${lwjglVersion}:natives-windows"
+    compile "org.lwjgl.lwjgl:lwjgl-platform:${lwjglVersion}:natives-linux"
+    compile "org.lwjgl.lwjgl:lwjgl-platform:${lwjglVersion}:natives-osx"
+}
