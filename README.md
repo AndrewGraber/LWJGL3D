@@ -1,8 +1,12 @@
 # LWJGL3D
-A 3D Game Framework Build with LWJGL 2.9.1 and the Slick-Util library
+A Work-in-progress 3D Game Framework Build with LWJGL 2.9.1 and the Slick-Util library in Java. Currently, there isn't much here, but I am constantly working on it and updating, adding new things, as well as improvements to old ones.
+
+If you find any issues with anything here, make sure to post them in the issues tab (unless there's already a post there for your issue). I greatly appreciate any feedback/criticism/help I can get, so don't be afraid to dish it out.
 
 ## Getting this Repo Working on Your Computer
-This project is built upon LWJGL 2.9.1 which you can download [here](https://sourceforge.net/projects/java-game-lib/files/Official%20Releases/LWJGL%202.9.1/). You only need the lwjgl-2.9.1.zip, but you can download the others if you want. You'll also need SlickUtil which can be found [here](http://slick.ninjacave.com/slick-util/). If you're using Intellij IDEA, here's how you can set up the dependency properly:
+This project is built upon LWJGL 2.9.1 which you can download [here](https://sourceforge.net/projects/java-game-lib/files/Official%20Releases/LWJGL%202.9.1/) and SlickUtil which can be found [here](http://slick.ninjacave.com/slick-util/). You only need the lwjgl-2.9.1.zip, but you can download the others if you want. (TODO: make a script/gradle task to handle this). 
+
+If you're using Intellij IDEA, here's how you can set up the dependency properly:
 1) Open up File->Project Structure
 2) In Project Settings->Modules, choose your module.
 3) Click the green plus sign on the far right and choose "JARs or Directories"
