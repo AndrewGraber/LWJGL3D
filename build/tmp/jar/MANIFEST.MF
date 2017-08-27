@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: libs/lwjgl/lwjgl.jar libs/lwjgl/lwjgl_util.jar libs/slick-
- util/slick-util.jar
-Main-Class: com.anzanama.lwjgl3d.Main
-
