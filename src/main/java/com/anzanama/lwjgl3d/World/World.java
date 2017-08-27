@@ -1,9 +1,7 @@
 package com.anzanama.lwjgl3d.World;
 
-import com.anzanama.lwjgl3d.World.Change.CreateChunkWC;
 import com.anzanama.lwjgl3d.World.Change.WorldChangeScheduler;
 import com.anzanama.lwjgl3d.World.Position.ChunkPos;
-import com.anzanama.lwjgl3d.World.Position.Pos3D;
 
 import java.util.HashMap;
 

@@ -2,7 +2,6 @@ package com.anzanama.lwjgl3d.GameObject;
 
 import com.anzanama.lwjgl3d.Main;
 import com.anzanama.lwjgl3d.Render.Model.TexturedModel;
-import com.anzanama.lwjgl3d.Render.Shader.Shader;
 import com.anzanama.lwjgl3d.Render.Shader.StaticShader;
 import com.anzanama.lwjgl3d.World.Position.Pos3D;
 import com.anzanama.lwjgl3d.World.World;

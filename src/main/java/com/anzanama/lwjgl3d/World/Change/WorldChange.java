@@ -1,6 +1,5 @@
 package com.anzanama.lwjgl3d.World.Change;
 
-import com.anzanama.lwjgl3d.GameObject.GameObject;
 import com.anzanama.lwjgl3d.World.World;
 
 public abstract class WorldChange {

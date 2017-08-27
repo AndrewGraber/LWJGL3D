@@ -1,4 +1,6 @@
 *.iml
 out/
+build/
 libs/
 .idea/
+CreateRelease.sh
