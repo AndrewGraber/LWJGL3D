@@ -3,8 +3,8 @@ package com.anzanama.lwjgl3d.Render.Shader;
 import org.lwjgl.util.vector.Matrix4f;
 
 public class StaticShader extends Shader {
-    private static final String VERTEX_FILE = "res/shaders/defaultShader.vert";
-    private static final String FRAGMENT_FILE = "res/shaders/defaultShader.frag";
+    private static final String VERTEX_FILE = "src/main/resources/shaders/defaultShader.vert";
+    private static final String FRAGMENT_FILE = "src/main/resources/shaders/defaultShader.frag";
 
     private int location_transformationMatrix;
     private int location_projectionMatrix;

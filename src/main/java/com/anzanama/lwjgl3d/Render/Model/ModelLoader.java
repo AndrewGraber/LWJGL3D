@@ -34,7 +34,7 @@ public class ModelLoader {
     public int loadTexture(String fileName) {
         Texture texture = null;
         try {
-            texture = TextureLoader.getTexture("PNG", new FileInputStream("res/textures/" + fileName + ".png"));
+            texture = TextureLoader.getTexture("PNG", new FileInputStream("src/main/resources/textures/" + fileName + ".png"));
         } catch(FileNotFoundException e) {
             e.printStackTrace();
         } catch(IOException e) {
