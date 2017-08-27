@@ -1,6 +1,6 @@
-package main.java.com.anzanama.lwjgl3d;
+package com.anzanama.lwjgl3d;
 
-import main.java.com.anzanama.lwjgl3d.Game.Game;
+import com.anzanama.lwjgl3d.Game.Game;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;

@@ -1,8 +1,8 @@
-package main.java.com.anzanama.lwjgl3d.World.Change;
+package com.anzanama.lwjgl3d.World.Change;
 
-import main.java.com.anzanama.lwjgl3d.GameObject.GameObject;
-import main.java.com.anzanama.lwjgl3d.World.Position.ChunkPos;
-import main.java.com.anzanama.lwjgl3d.World.World;
+import com.anzanama.lwjgl3d.GameObject.GameObject;
+import com.anzanama.lwjgl3d.World.Position.ChunkPos;
+import com.anzanama.lwjgl3d.World.World;
 
 public class SwitchChunksWC extends WorldChange {
     ChunkPos prevPos, newPos;

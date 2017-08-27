@@ -1,7 +1,7 @@
-package main.java.com.anzanama.lwjgl3d.World;
+package com.anzanama.lwjgl3d.World;
 
-import main.java.com.anzanama.lwjgl3d.GameObject.GameObject;
-import main.java.com.anzanama.lwjgl3d.World.Position.ChunkPos;
+import com.anzanama.lwjgl3d.GameObject.GameObject;
+import com.anzanama.lwjgl3d.World.Position.ChunkPos;
 
 import java.util.ArrayList;
 

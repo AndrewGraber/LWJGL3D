@@ -1,10 +1,10 @@
-package main.java.com.anzanama.lwjgl3d.GameObject;
+package com.anzanama.lwjgl3d.GameObject;
 
-import main.java.com.anzanama.lwjgl3d.Input;
-import main.java.com.anzanama.lwjgl3d.World.Change.SwitchChunksWC;
-import main.java.com.anzanama.lwjgl3d.World.Position.ChunkPos;
-import main.java.com.anzanama.lwjgl3d.World.Position.Pos3D;
-import main.java.com.anzanama.lwjgl3d.World.World;
+import com.anzanama.lwjgl3d.Input;
+import com.anzanama.lwjgl3d.World.Change.SwitchChunksWC;
+import com.anzanama.lwjgl3d.World.Position.ChunkPos;
+import com.anzanama.lwjgl3d.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.World.World;
 import org.lwjgl.input.Mouse;
 
 public class PlayerObject extends EmptyObject {

@@ -1,4 +1,4 @@
-package main.java.com.anzanama.lwjgl3d.World.Position;
+package com.anzanama.lwjgl3d.World.Position;
 
 public class TilePos {
     private int x, y, z;

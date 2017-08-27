@@ -1,4 +1,4 @@
-package main.java.com.anzanama.lwjgl3d.World.Position;
+package com.anzanama.lwjgl3d.World.Position;
 
 public interface IPositioned {
     public Pos3D getPos();

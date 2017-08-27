@@ -1,4 +1,4 @@
-package main.java.com.anzanama.lwjgl3d.World.Position;
+package com.anzanama.lwjgl3d.World.Position;
 
 /**
  * Rot3D - Holds modeled information about an object's rotation about the x-axis, y-axis, and z-axis

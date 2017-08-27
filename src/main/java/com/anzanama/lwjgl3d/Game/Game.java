@@ -1,13 +1,13 @@
-package main.java.com.anzanama.lwjgl3d.Game;
+package com.anzanama.lwjgl3d.Game;
 
-import main.java.com.anzanama.lwjgl3d.GameObject.GameObject;
-import main.java.com.anzanama.lwjgl3d.Input;
-import main.java.com.anzanama.lwjgl3d.GameObject.PlayerObject;
-import main.java.com.anzanama.lwjgl3d.World.Chunk;
-import main.java.com.anzanama.lwjgl3d.World.Position.ChunkPos;
-import main.java.com.anzanama.lwjgl3d.World.Position.Pos3D;
-import main.java.com.anzanama.lwjgl3d.World.World;
-import main.java.com.anzanama.lwjgl3d.World.WorldProvider;
+import com.anzanama.lwjgl3d.GameObject.GameObject;
+import com.anzanama.lwjgl3d.Input;
+import com.anzanama.lwjgl3d.GameObject.PlayerObject;
+import com.anzanama.lwjgl3d.World.Chunk;
+import com.anzanama.lwjgl3d.World.Position.ChunkPos;
+import com.anzanama.lwjgl3d.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.World.World;
+import com.anzanama.lwjgl3d.World.WorldProvider;
 import org.lwjgl.opengl.Display;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package main.java.com.anzanama.lwjgl3d.World.Position;
+package com.anzanama.lwjgl3d.World.Position;
 
 /**
  * Pos3D - Combines Loc3D and Rot3D to provide a rich structure for determining the whereabouts of an

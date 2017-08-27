@@ -1,6 +1,6 @@
-package main.java.com.anzanama.lwjgl3d.GameObject;
+package com.anzanama.lwjgl3d.GameObject;
 
-import main.java.com.anzanama.lwjgl3d.World.Position.IPositioned;
+import com.anzanama.lwjgl3d.World.Position.IPositioned;
 
 public abstract class GameObject implements IPositioned {
     public abstract void update();
