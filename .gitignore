@@ -3,4 +3,5 @@ out/
 build/
 libs/
 .idea/
+.gradle/
 CreateRelease.sh
