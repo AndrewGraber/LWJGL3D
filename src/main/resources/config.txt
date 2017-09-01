@@ -1,0 +1,26 @@
+#This is the configuration file. If you muck this all up, just delete the file.
+#It will be recreated with default values.
+
+#The Width of the screen (Default: 1280)
+i:screen_width=1280
+
+#The height of the screen (Default: 720)
+i:screen_height=720
+
+#The maximum value for the FPS (Default: 60)
+i:fps_cap=60
+
+#The Sensitivity of the mouse (Default: 0.25f)
+f:mouse_sensitivity=0.25f
+
+#The Field of View of the camera (Default: 70f)
+f:camera_fov=70f
+
+#The distance of the near clipping plane (Default: 0.1f)
+f:near_clip=0.1f
+
+#The render distance of the camera (Default: 1000f)
+f:render_distance=1000f
+
+#The Movement speed of the camera (Default: 0.1f)
+f:move_speed=0.1f

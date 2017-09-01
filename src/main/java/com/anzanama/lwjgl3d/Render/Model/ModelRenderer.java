@@ -2,14 +2,12 @@ package com.anzanama.lwjgl3d.Render.Model;
 
 import com.anzanama.lwjgl3d.GameObject.ModeledObject;
 import com.anzanama.lwjgl3d.Render.Shader.StaticShader;
+import com.anzanama.lwjgl3d.Util.Config;
 import com.anzanama.lwjgl3d.Util.Math;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.Matrix4f;
 
 public class ModelRenderer {
-    private static final float FOV = 70;
-    private static final float NEAR_CLIP = 0.1f;
-    private static final float RENDER_DISTANCE = 1000f;
     private Matrix4f projectionMatrix;
 
     public ModelRenderer(StaticShader shader) {
@@ -37,16 +35,16 @@ public class ModelRenderer {
 
     private void createProjectionMatrix() {
         float aspectRatio = (float) Display.getWidth()/(float)Display.getHeight();
-        float y_scale = (float) (1f / java.lang.Math.tan(java.lang.Math.toRadians(FOV / 2f))) * aspectRatio;
+        float y_scale = (float) (1f / java.lang.Math.tan(java.lang.Math.toRadians(Config.getFloat("camera_fov") / 2f))) * aspectRatio;
         float x_scale = y_scale / aspectRatio;
-        float frustum_length = RENDER_DISTANCE - NEAR_CLIP;
+        float frustum_length = Config.getFloat("render_distance") - Config.getFloat("near_clip");
 
         projectionMatrix = new Matrix4f();
         projectionMatrix.m00 = x_scale;
         projectionMatrix.m11 = y_scale;
-        projectionMatrix.m22 = -((RENDER_DISTANCE + NEAR_CLIP)/frustum_length);
+        projectionMatrix.m22 = -((Config.getFloat("render_distance") + Config.getFloat("near_clip"))/frustum_length);
         projectionMatrix.m23 = -1;
-        projectionMatrix.m32 = -((2 * NEAR_CLIP * RENDER_DISTANCE)/frustum_length);
+        projectionMatrix.m32 = -((2 * Config.getFloat("near_clip") * Config.getFloat("render_distance"))/frustum_length);
         projectionMatrix.m33 = 0;
     }
 }

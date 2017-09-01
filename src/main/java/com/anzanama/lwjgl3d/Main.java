@@ -2,6 +2,7 @@ package com.anzanama.lwjgl3d;
 
 import com.anzanama.lwjgl3d.Game.Game;
 import com.anzanama.lwjgl3d.Render.DisplayManager;
+import com.anzanama.lwjgl3d.Util.Config;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -29,6 +30,8 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Config.initialize("config.txt");
 
         DisplayManager.createDisplay();
 
