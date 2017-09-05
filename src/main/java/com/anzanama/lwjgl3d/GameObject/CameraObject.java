@@ -1,6 +1,7 @@
 package com.anzanama.lwjgl3d.GameObject;
 
 import com.anzanama.lwjgl3d.Input;
+import com.anzanama.lwjgl3d.Util.Config;
 import com.anzanama.lwjgl3d.World.Position.Pos3D;
 import com.anzanama.lwjgl3d.World.World;
 
@@ -8,9 +9,6 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
 
 public class CameraObject extends GameObject {
-    public static final float DEFAULT_SENSITIVITY = 0.25f;
-    private static final float SPEED = 0.1f;
-
     private Pos3D pos;
     private Input input;
     private float sensitivity;
@@ -26,11 +24,11 @@ public class CameraObject extends GameObject {
     }
 
     public CameraObject(Pos3D pos, Input input) {
-        this(pos, input, DEFAULT_SENSITIVITY);
+        this(pos, input, Config.getFloat("mouse_sensitivity"));
     }
 
     public CameraObject(Input input) {
-        this(new Pos3D(), input, DEFAULT_SENSITIVITY);
+        this(new Pos3D(), input, Config.getFloat("mouse_sensitivity"));
     }
 
     @Override
@@ -56,22 +54,22 @@ public class CameraObject extends GameObject {
 
     public void updateMovement() {
         if(input.getInput("forward") && !input.getInput("back")) {
-            moveForward(SPEED);
+            moveForward(Config.getFloat("move_speed"));
         }
         if(input.getInput("back") && !input.getInput("forward")) {
-            moveBack(SPEED);
+            moveBack(Config.getFloat("move_speed"));
         }
         if(input.getInput("left") && !input.getInput("right")) {
-            strafeLeft(SPEED);
+            strafeLeft(Config.getFloat("move_speed"));
         }
         if(input.getInput("right") && !input.getInput("left")) {
-            strafeRight(SPEED);
+            strafeRight(Config.getFloat("move_speed"));
         }
         if(input.getInput("jump") && !input.getInput("sneak")) {
-            getPos().getLoc().addY(SPEED);
+            getPos().getLoc().addY(Config.getFloat("move_speed"));
         }
         if(input.getInput("sneak") && !input.getInput("jump")) {
-            getPos().getLoc().addY(-SPEED);
+            getPos().getLoc().addY(-Config.getFloat("move_speed"));
         }
         if(input.getInput("mouse_x")) {
             getPos().getRot().addYaw(((float)input.pullMouseDX())*getSensitivity());

@@ -9,6 +9,7 @@ import com.anzanama.lwjgl3d.Render.Light;
 import com.anzanama.lwjgl3d.Render.Model.*;
 import com.anzanama.lwjgl3d.Render.Shader.StaticShader;
 import com.anzanama.lwjgl3d.Render.Texture.ModelTexture;
+import com.anzanama.lwjgl3d.Util.Config;
 import com.anzanama.lwjgl3d.Util.Math;
 import com.anzanama.lwjgl3d.World.Chunk;
 import com.anzanama.lwjgl3d.World.Position.ChunkPos;
@@ -24,6 +25,7 @@ import java.util.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Game {
+
     public boolean stopGameFlag;
     private ModelLoader modelLoader;
     private ModelRenderer modelRenderer;
@@ -36,6 +38,7 @@ public class Game {
     private ModeledObject object;
 
     public void initialize() {
+
         world = WorldProvider.createNewWorld("world");
         input = new Input();
         modelLoader = new ModelLoader();
