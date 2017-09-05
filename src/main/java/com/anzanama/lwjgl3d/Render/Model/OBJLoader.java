@@ -15,7 +15,7 @@ public class OBJLoader {
     public static RawModel loadObj(String fileName, ModelLoader loader) {
         FileReader fr = null;
         try {
-            fr = new FileReader(new File("src/main/resources/" + fileName + ".obj"));
+            fr = new FileReader(new File("src/main/resources/models/" + fileName + ".obj"));
         } catch(FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -84,7 +84,7 @@ public class OBJLoader {
         for(int i=0; i < indices.size(); i++) {
             indicesArray[i] = indices.get(i);
         }
-        return loader.loadToVAO(verticesArray, textureArray, indicesArray);
+        return loader.loadToVAO(verticesArray, textureArray, normalsArray, indicesArray);
     }
 
     private static void processVertex(String[] vertexData, List<Integer> indices, List<Vector2f> textures,

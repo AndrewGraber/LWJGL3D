@@ -5,6 +5,7 @@ import com.anzanama.lwjgl3d.GameObject.GameObject;
 import com.anzanama.lwjgl3d.GameObject.ModeledObject;
 import com.anzanama.lwjgl3d.Input;
 import com.anzanama.lwjgl3d.Render.DisplayManager;
+import com.anzanama.lwjgl3d.Render.Light;
 import com.anzanama.lwjgl3d.Render.Model.*;
 import com.anzanama.lwjgl3d.Render.Shader.StaticShader;
 import com.anzanama.lwjgl3d.Render.Texture.ModelTexture;
@@ -16,6 +17,7 @@ import com.anzanama.lwjgl3d.World.World;
 import com.anzanama.lwjgl3d.World.WorldProvider;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 
 import java.util.*;
 
@@ -28,6 +30,7 @@ public class Game {
     private StaticShader shader;
     private World world;
     private Input input;
+    private Light light;
 
     private CameraObject camera;
     private ModeledObject object;
@@ -39,9 +42,12 @@ public class Game {
         shader = new StaticShader();
         modelRenderer = new ModelRenderer(shader);
         camera = new CameraObject(input);
+        light = new Light(new Vector3f(0, 0, -20), new Vector3f(1, 1, 1));
 
-        RawModel model = OBJLoader.loadObj("stall", modelLoader);
-        ModelTexture texture = new ModelTexture(modelLoader.loadTexture("stallTexture"));
+        RawModel model = OBJLoader.loadObj("dragon", modelLoader);
+        ModelTexture texture = new ModelTexture(modelLoader.loadTexture("solid"));
+        texture.setShineDamper(10);
+        texture.setReflectivity(1);
         TexturedModel texturedModel = new TexturedModel(model, texture);
         object = new ModeledObject(texturedModel, new Pos3D(0, 0, -50, 0, 180, 0), world, shader);
     }
@@ -75,6 +81,7 @@ public class Game {
         glClearColor(0.3f, 0.3f, 0.3f, 1);
 
         shader.start();
+        shader.loadLight(light);
         shader.loadViewMatrix(Math.createViewMatrix(camera.getPos()));
 
         HashMap<ChunkPos, Chunk> chunkMap = world.getChunkMap();

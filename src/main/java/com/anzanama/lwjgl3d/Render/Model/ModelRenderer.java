@@ -2,6 +2,7 @@ package com.anzanama.lwjgl3d.Render.Model;
 
 import com.anzanama.lwjgl3d.GameObject.ModeledObject;
 import com.anzanama.lwjgl3d.Render.Shader.StaticShader;
+import com.anzanama.lwjgl3d.Render.Texture.ModelTexture;
 import com.anzanama.lwjgl3d.Util.Math;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.Matrix4f;
@@ -25,13 +26,17 @@ public class ModelRenderer {
         GL30.glBindVertexArray(rawModel.getVaoID());
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
+        GL20.glEnableVertexAttribArray(2);
         Matrix4f transformationMatrix = Math.createTransformationMatrix(object.getPos());
         shader.loadTransformationMatrix(transformationMatrix);
+        ModelTexture texture = texturedModel.getTexture();
+        shader.loadShineVariables(texture.getShineDamper(), texture.getReflectivity());
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturedModel.getTexture().getID());
         GL11.glDrawElements(GL11.GL_TRIANGLES, rawModel.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
         GL20.glDisableVertexAttribArray(0);
         GL20.glDisableVertexAttribArray(1);
+        GL20.glDisableVertexAttribArray(2);
         GL30.glBindVertexArray(0);
     }
 

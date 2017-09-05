@@ -17,6 +17,11 @@ public class ModeledObject extends EmptyObject {
     }
 
     @Override
+    public void update() {
+        pos.getRot().addYaw(1f);
+    }
+
+    @Override
     public void render() {
         shader.start();
         Main.getGame().getModelRenderer().render(this, shader);
