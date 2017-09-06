@@ -23,6 +23,10 @@ public class Pos3D {
         this(pos, rot, 1.0f);
     }
 
+    public Pos3D(float x, float y, float z, float pitch, float yaw, float roll, float scale) {
+        this(new Loc3D(x, y, z), new Rot3D(pitch, yaw, roll), scale);
+    }
+
     public Pos3D(float x, float y, float z, float pitch, float yaw, float roll) {
         this(new Loc3D(x, y, z), new Rot3D(pitch, yaw, roll), 1.0f);
     }
@@ -99,4 +103,8 @@ public class Pos3D {
         this.loc.setZ(z);
     }
     /** End Getters/Setters */
+
+    public static Pos3D fromChunkPos(ChunkPos chunkPos) {
+        return new Pos3D(chunkPos.getX()*256, chunkPos.getY()*256, chunkPos.getZ()*256);
+    }
 }

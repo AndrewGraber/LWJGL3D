@@ -98,7 +98,13 @@ public class Config {
                     "f:render_distance=1000f\n" +
                     "\n" +
                     "#The Movement speed of the camera (Default: 0.1f)\n" +
-                    "f:move_speed=0.1f");
+                    "f:move_speed=0.1f\n" +
+                    "\n" +
+                    "#The ambient light (brightness) in the world. This is the\n" +
+                    "#amount of light that will show when no light source is in\n" +
+                    "#range. 0.0f would be complete darkness. 1.0f would be complete\n" +
+                    "#light (no shadows). (Default: 0.2f)\n" +
+                    "f:ambient_light=0.2f");
             writer.flush();
             writer.close();
         } catch (IOException e) {

@@ -4,9 +4,9 @@ import com.anzanama.lwjgl3d.Render.Light;
 import com.anzanama.lwjgl3d.Util.Config;
 import org.lwjgl.util.vector.Matrix4f;
 
-public class StaticShader extends Shader {
-    private static final String VERTEX_FILE = "src/main/resources/shaders/modelShader.vert";
-    private static final String FRAGMENT_FILE = "src/main/resources/shaders/modelShader.frag";
+public class TerrainShader extends Shader {
+    private static final String VERTEX_FILE = "src/main/resources/shaders/terrainShader.vert";
+    private static final String FRAGMENT_FILE = "src/main/resources/shaders/terrainShader.frag";
 
     private int location_transformationMatrix;
     private int location_projectionMatrix;
@@ -16,9 +16,8 @@ public class StaticShader extends Shader {
     private int location_shineDamper;
     private int location_reflectivity;
     private int location_ambientLight;
-    private int location_useFakeLighting;
 
-    public StaticShader() {
+    public TerrainShader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
     }
 
@@ -39,11 +38,6 @@ public class StaticShader extends Shader {
         location_shineDamper = super.getUniformLocation("shineDamper");
         location_reflectivity = super.getUniformLocation("reflectivity");
         location_ambientLight = super.getUniformLocation("ambientLight");
-        location_useFakeLighting = super.getUniformLocation("useFakeLighting");
-    }
-
-    public void loadFakeLightingVariable(boolean useFake) {
-        super.loadBoolean(location_useFakeLighting, useFake);
     }
 
     public void loadShineVariables(float damper, float reflectivity) {

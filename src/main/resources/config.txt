@@ -24,3 +24,9 @@ f:render_distance=1000f
 
 #The Movement speed of the camera (Default: 0.1f)
 f:move_speed=0.1f
+
+#The ambient light (brightness) in the world. This is the
+#amount of light that will show when no light source is in
+#range. 0.0f would be complete darkness. 1.0f would be complete
+#light (no shadows). (Default: 0.2f)
+f:ambient_light=0.2f

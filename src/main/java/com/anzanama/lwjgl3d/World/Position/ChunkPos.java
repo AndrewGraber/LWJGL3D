@@ -38,6 +38,6 @@ public class ChunkPos {
     }
 
     public static ChunkPos fromPos3D(Pos3D pos3D) {
-        return new ChunkPos(((int)pos3D.getX())/16, ((int)pos3D.getY())/16, ((int)pos3D.getZ())/16);
+        return new ChunkPos(((int)pos3D.getX())/256, ((int)pos3D.getY())/256, ((int)pos3D.getZ())/256);
     }
 }
