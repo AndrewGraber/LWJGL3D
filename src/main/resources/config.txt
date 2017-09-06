@@ -13,6 +13,9 @@ i:fps_cap=60
 #The Sensitivity of the mouse (Default: 0.25f)
 f:mouse_sensitivity=0.25f
 
+#The Sensitivity of the controller joysticks (Default: 1.0f)
+f:controller_sensitivity=1.0f
+
 #The Field of View of the camera (Default: 70f)
 f:camera_fov=70f
 
@@ -23,10 +26,28 @@ f:near_clip=0.1f
 f:render_distance=1000f
 
 #The Movement speed of the camera (Default: 0.1f)
-f:move_speed=0.1f
+f:camera_move_speed=0.1f
+
+#The Movement speed of the player (Default: 0.3f)
+f:player_move_speed=0.3f
+
+#The Turn speed of the player (Default: 160.0f)
+f:player_turn_speed=160.0f
 
 #The ambient light (brightness) in the world. This is the
 #amount of light that will show when no light source is in
 #range. 0.0f would be complete darkness. 1.0f would be complete
 #light (no shadows). (Default: 0.2f)
 f:ambient_light=0.2f
+
+#The density of the fog that slowly fades objects away (Default: 0.0035f)
+f:fog_density=0.0035f
+
+#The gradient of the fog (Default: 5f)
+f:fog_gradient=5f
+
+#The color of the sky - in red, green, and blue in that order.
+#(Default: 0.7f, 0.9f, 1.0f)
+f:sky_red=0.7f
+f:sky_green=0.9f
+f:sky_blue=1.0f

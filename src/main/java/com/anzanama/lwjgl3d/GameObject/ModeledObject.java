@@ -1,9 +1,7 @@
 package com.anzanama.lwjgl3d.GameObject;
 
-import com.anzanama.lwjgl3d.Game.Game;
 import com.anzanama.lwjgl3d.Main;
 import com.anzanama.lwjgl3d.Render.Model.TexturedModel;
-import com.anzanama.lwjgl3d.Render.Shader.StaticShader;
 import com.anzanama.lwjgl3d.World.Position.Pos3D;
 import com.anzanama.lwjgl3d.World.World;
 
@@ -16,7 +14,7 @@ public class ModeledObject extends EmptyObject {
     }
 
     @Override
-    public void render() {
+    public void render(float delta) {
         Main.getGame().getRenderer().processModeledObject(this);
     }
 

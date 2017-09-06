@@ -9,7 +9,6 @@ import com.anzanama.lwjgl3d.Render.Shader.TerrainShader;
 import com.anzanama.lwjgl3d.Util.Config;
 import com.anzanama.lwjgl3d.Util.Math;
 import com.anzanama.lwjgl3d.World.TerrainChunk;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
@@ -51,13 +50,17 @@ public class GameRenderer {
     public void render(Light sun, CameraObject camera) {
         prepare();
         shader.start();
+        shader.loadSkyColor(Config.getFloat("sky_red"), Config.getFloat("sky_green"), Config.getFloat("sky_blue"));
         shader.loadLight(sun);
+        shader.loadConfigValues();
         shader.loadViewMatrix(Math.createViewMatrix(camera.getPos()));
         renderer.render(objects);
         shader.stop();
 
         terrainShader.start();
+        terrainShader.loadSkyColor(Config.getFloat("sky_red"), Config.getFloat("sky_green"), Config.getFloat("sky_blue"));
         terrainShader.loadLight(sun);
+        terrainShader.loadConfigValues();
         terrainShader.loadViewMatrix(Math.createViewMatrix(camera.getPos()));
         terrainRenderer.render(terrainChunks);
         terrainShader.stop();
@@ -84,7 +87,7 @@ public class GameRenderer {
     public void prepare() {
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.3f, 0.3f, 0.3f, 1);
+        glClearColor(Config.getFloat("sky_red"), Config.getFloat("sky_green"), Config.getFloat("sky_blue"), 1);
     }
 
     public void cleanUp() {

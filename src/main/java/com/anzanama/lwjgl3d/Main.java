@@ -4,6 +4,7 @@ import com.anzanama.lwjgl3d.Game.Game;
 import com.anzanama.lwjgl3d.Render.DisplayManager;
 import com.anzanama.lwjgl3d.Util.Config;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Controllers;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -37,6 +38,7 @@ public class Main {
 
         try {
             Keyboard.create();
+            Controllers.create();
             Mouse.create();
             Mouse.setGrabbed(true);
         } catch (LWJGLException e) {
@@ -54,6 +56,7 @@ public class Main {
         DisplayManager.closeDisplay();
         Keyboard.destroy();
         Mouse.destroy();
+        Controllers.destroy();
     }
 
     public static Game getGame() {

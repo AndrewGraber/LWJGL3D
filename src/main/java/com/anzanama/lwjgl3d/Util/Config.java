@@ -88,6 +88,9 @@ public class Config {
                     "#The Sensitivity of the mouse (Default: 0.25f)\n" +
                     "f:mouse_sensitivity=0.25f\n" +
                     "\n" +
+                    "#The Sensitivity of the controller joysticks (Default: 1.0f)\n" +
+                    "f:controller_sensitivity=1.0f\n" +
+                    "\n" +
                     "#The Field of View of the camera (Default: 70f)\n" +
                     "f:camera_fov=70f\n" +
                     "\n" +
@@ -104,7 +107,19 @@ public class Config {
                     "#amount of light that will show when no light source is in\n" +
                     "#range. 0.0f would be complete darkness. 1.0f would be complete\n" +
                     "#light (no shadows). (Default: 0.2f)\n" +
-                    "f:ambient_light=0.2f");
+                    "f:ambient_light=0.2f\n" +
+                    "\n" +
+                    "#The density of the fog that slowly fades objects away (Default: 0.0035f)\n" +
+                    "f:fog_density=0.0035f\n" +
+                    "\n" +
+                    "#The gradient of the fog (Default: 5f)\n" +
+                    "f:fog_gradient=5f\n" +
+                    "\n" +
+                    "#The color of the sky - in red, green, and blue in that order.\n" +
+                    "#(Default: 0.7f, 0.9f, 1.0f)\n" +
+                    "f:sky_red=0.7f\n" +
+                    "f:sky_green=0.9f\n" +
+                    "f:sky_blue=1.0f");
             writer.flush();
             writer.close();
         } catch (IOException e) {

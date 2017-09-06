@@ -34,4 +34,5 @@ dependencies {
     compile "org.lwjgl.lwjgl:lwjgl-platform:${lwjglVersion}:natives-linux"
     compile "org.lwjgl.lwjgl:lwjgl-platform:${lwjglVersion}:natives-osx"
     compile "slick-util:slick-util:1.0.0"
+    compile "net.java.jinput:jinput:2.0.7"
 }

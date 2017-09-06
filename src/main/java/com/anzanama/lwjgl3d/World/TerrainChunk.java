@@ -3,17 +3,21 @@ package com.anzanama.lwjgl3d.World;
 import com.anzanama.lwjgl3d.Render.Model.ModelLoader;
 import com.anzanama.lwjgl3d.Render.Model.RawModel;
 import com.anzanama.lwjgl3d.Render.Texture.ModelTexture;
+import com.anzanama.lwjgl3d.Render.Texture.TerrainTexture;
+import com.anzanama.lwjgl3d.Render.Texture.TerrainTexturePack;
 import com.anzanama.lwjgl3d.World.Position.ChunkPos;
 
 public class TerrainChunk extends Chunk {
     private static final float SIZE = 256;
     private static final int VERTEX_COUNT = 64;
     private RawModel model;
-    private ModelTexture texture;
+    private TerrainTexturePack texturePack;
+    private TerrainTexture blendMap;
 
-    public TerrainChunk(ChunkPos chunkPos, ModelLoader loader, ModelTexture texture) {
+    public TerrainChunk(ChunkPos chunkPos, ModelLoader loader, TerrainTexturePack texturePack, TerrainTexture blendMap) {
         super(chunkPos);
-        this.texture = texture;
+        this.texturePack = texturePack;
+        this.blendMap = blendMap;
         this.model = generateTerrain(loader);
     }
 
@@ -59,7 +63,11 @@ public class TerrainChunk extends Chunk {
         return model;
     }
 
-    public ModelTexture getTexture() {
-        return texture;
+    public TerrainTexturePack getTexturePack() {
+        return texturePack;
+    }
+
+    public TerrainTexture getBlendMap() {
+        return blendMap;
     }
 }

@@ -5,6 +5,7 @@ import com.anzanama.lwjgl3d.Render.Model.RawModel;
 import com.anzanama.lwjgl3d.Render.Model.TexturedModel;
 import com.anzanama.lwjgl3d.Render.Shader.TerrainShader;
 import com.anzanama.lwjgl3d.Render.Texture.ModelTexture;
+import com.anzanama.lwjgl3d.Render.Texture.TerrainTexturePack;
 import com.anzanama.lwjgl3d.Util.Math;
 import com.anzanama.lwjgl3d.World.Position.Pos3D;
 import com.anzanama.lwjgl3d.World.TerrainChunk;
@@ -23,6 +24,7 @@ public class TerrainRenderer {
         this.shader = shader;
         shader.start();
         shader.loadProjectionMatrix(projectionMatrix);
+        shader.connectTextureUnits();
         shader.stop();
     }
 
@@ -41,10 +43,22 @@ public class TerrainRenderer {
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
         GL20.glEnableVertexAttribArray(2);
-        ModelTexture texture = terrainChunk.getTexture();
-        shader.loadShineVariables(texture.getShineDamper(), texture.getReflectivity());
+        bindTextures(terrainChunk);
+        shader.loadShineVariables(1, 0);
+    }
+
+    private void bindTextures(TerrainChunk terrainChunk) {
+        TerrainTexturePack texturePack = terrainChunk.getTexturePack();
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getID());
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturePack.getBackgroundTexture().getTextureID());
+        GL13.glActiveTexture(GL13.GL_TEXTURE1);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturePack.getrTexture().getTextureID());
+        GL13.glActiveTexture(GL13.GL_TEXTURE2);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturePack.getgTexture().getTextureID());
+        GL13.glActiveTexture(GL13.GL_TEXTURE3);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturePack.getbTexture().getTextureID());
+        GL13.glActiveTexture(GL13.GL_TEXTURE4);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, terrainChunk.getBlendMap().getTextureID());
     }
 
     private void unbindTexturedModel() {

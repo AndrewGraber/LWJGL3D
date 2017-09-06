@@ -53,16 +53,16 @@ public class EmptyObject extends GameObject {
     }
 
     @Override
-    public void update() {
+    public void update(float delta) {
         for(GameObject obj : children) {
-            obj.update();
+            obj.update(delta);
         }
     }
 
     @Override
-    public void render() {
+    public void render(float delta) {
         for(GameObject obj : children) {
-            obj.render();
+            obj.render(delta);
         }
     }
 }

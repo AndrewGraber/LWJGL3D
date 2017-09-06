@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OBJLoader {
+public class OldOBJLoader {
 
     public static RawModel loadObj(String fileName, ModelLoader loader) {
         FileReader fr = null;

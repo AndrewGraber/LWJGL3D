@@ -14,7 +14,7 @@ public class TestCubeObject extends EmptyObject {
     }
 
     @Override
-    public void render() {
+    public void render(float delta) {
         glPushMatrix();
         glTranslatef(pos.getX(), pos.getY(), pos.getZ());
         glRotatef(pos.getRot().getPitch(), 1, 0, 0);

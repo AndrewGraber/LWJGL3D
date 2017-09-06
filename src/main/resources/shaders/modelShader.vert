@@ -8,6 +8,7 @@ out vec2 pass_textureCoords;
 out vec3 surfaceNormal;
 out vec3 toLightVector;
 out vec3 toCameraVector;
+out float visibility;
 
 uniform mat4 transformationMatrix;
 uniform mat4 projectionMatrix;
@@ -15,11 +16,14 @@ uniform mat4 viewMatrix;
 uniform vec3 lightPosition;
 
 uniform float useFakeLighting;
+uniform float fogDensity;
+uniform float fogGradient;
 
 void main(void) {
 
     vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
-    gl_Position = projectionMatrix * viewMatrix * worldPosition;
+    vec4 positionRelToCam = viewMatrix * worldPosition;
+    gl_Position = projectionMatrix * positionRelToCam;
     pass_textureCoords = textureCoords;
 
     vec3 actualNormal = normal;
@@ -30,5 +34,9 @@ void main(void) {
     surfaceNormal = (transformationMatrix * vec4(actualNormal, 0.0)).xyz;
     toLightVector = lightPosition - worldPosition.xyz;
     toCameraVector = (inverse(viewMatrix) * vec4(0, 0, 0, 1)).xyz - worldPosition.xyz;
+
+    float distance = length(positionRelToCam.xyz);
+    visibility = exp(-pow((distance*fogDensity), fogGradient));
+    visibility = clamp(visibility, 0.0, 1.0);
 
 }
