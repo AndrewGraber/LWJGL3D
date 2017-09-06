@@ -1,6 +1,6 @@
 package com.anzanama.lwjgl3d.Util;
 
-import com.anzanama.lwjgl3d.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 

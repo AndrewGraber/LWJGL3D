@@ -1,10 +1,8 @@
 package com.anzanama.lwjgl3d.Input;
 
 import com.anzanama.lwjgl3d.Util.Config;
-import com.anzanama.lwjgl3d.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
 import org.lwjgl.input.Controller;
-
-import java.util.HashMap;
 
 public class ControllerDS4Input extends Input {
     Controller controller;

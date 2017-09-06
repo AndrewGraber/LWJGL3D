@@ -1,26 +1,25 @@
 package com.anzanama.lwjgl3d.Game;
 
-import com.anzanama.lwjgl3d.GameObject.CameraObject;
-import com.anzanama.lwjgl3d.GameObject.ControlledObject;
-import com.anzanama.lwjgl3d.GameObject.GameObject;
-import com.anzanama.lwjgl3d.GameObject.ModeledObject;
+import com.anzanama.lwjgl3d.Game.GameObject.CameraObject;
+import com.anzanama.lwjgl3d.Game.GameObject.ControlledObject;
+import com.anzanama.lwjgl3d.Game.GameObject.GameObject;
+import com.anzanama.lwjgl3d.Game.GameObject.ModeledObject;
 import com.anzanama.lwjgl3d.Input.ControllerDS4Input;
 import com.anzanama.lwjgl3d.Input.Input;
 import com.anzanama.lwjgl3d.Input.KeyboardInput;
 import com.anzanama.lwjgl3d.Render.DisplayManager;
-import com.anzanama.lwjgl3d.Render.GameRenderer;
-import com.anzanama.lwjgl3d.Render.Light;
+import com.anzanama.lwjgl3d.Render.Renderer.GameRenderer;
+import com.anzanama.lwjgl3d.Render.Lighting.Light;
 import com.anzanama.lwjgl3d.Render.Model.*;
 import com.anzanama.lwjgl3d.Render.Texture.ModelTexture;
 import com.anzanama.lwjgl3d.Render.Texture.TerrainTexture;
 import com.anzanama.lwjgl3d.Render.Texture.TerrainTexturePack;
-import com.anzanama.lwjgl3d.World.Chunk;
-import com.anzanama.lwjgl3d.World.Position.ChunkPos;
-import com.anzanama.lwjgl3d.World.Position.Pos3D;
-import com.anzanama.lwjgl3d.World.TerrainChunk;
-import com.anzanama.lwjgl3d.World.World;
-import com.anzanama.lwjgl3d.World.WorldProvider;
-import org.lwjgl.input.Controller;
+import com.anzanama.lwjgl3d.Game.World.Chunk.Chunk;
+import com.anzanama.lwjgl3d.Game.World.Position.ChunkPos;
+import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.Game.World.Terrain.Terrain;
+import com.anzanama.lwjgl3d.Game.World.World;
+import com.anzanama.lwjgl3d.Game.World.WorldProvider;
 import org.lwjgl.input.Controllers;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
@@ -37,15 +36,15 @@ public class Game {
     private Light light;
 
     private CameraObject camera;
-    private TerrainChunk terrainChunk, terrainChunk2, terrainChunk3, terrainChunk4;
 
     public void initialize() {
-        Controller controller = Controllers.getController(0);
-
-        renderer = new GameRenderer();
+        //Backend Object Intitialization
         world = WorldProvider.createNewWorld("world");
-        playerInput = new ControllerDS4Input(controller);
+        playerInput = new ControllerDS4Input(Controllers.getController(0));
         cameraInput = new KeyboardInput();
+
+        //Rendering Object Initialization
+        renderer = new GameRenderer();
         modelLoader = new ModelLoader();
         camera = new CameraObject(new Pos3D(256, 1, 256), cameraInput);
         light = new Light(new Vector3f(256, 200, 256), new Vector3f(1, 1, 1));
@@ -60,18 +59,21 @@ public class Game {
         TerrainTexture blendMap = new TerrainTexture(modelLoader.loadTexture("blendMap"));
         //*******************************************************************************************************
 
-        RawModel model = OBJFileLoader.loadObjModel("dragon", modelLoader);
-        ModelTexture texture = new ModelTexture(modelLoader.loadTexture("solid"));
-        texture.setShineDamper(10);
-        texture.setReflectivity(1);
-        TexturedModel texturedModel = new TexturedModel(model, texture);
-        new ModeledObject(texturedModel, new Pos3D(256, 200, 256, 0, 180, 0), world);
-        terrainChunk = new TerrainChunk(new ChunkPos(1, 0, 1), modelLoader, texturePack, blendMap);
-        terrainChunk2 = new TerrainChunk(new ChunkPos(2, 0, 1), modelLoader, texturePack, blendMap);
-        terrainChunk3 = new TerrainChunk(new ChunkPos(2, 0, 2), modelLoader, texturePack, blendMap);
-        terrainChunk4 = new TerrainChunk(new ChunkPos(1, 0, 2), modelLoader, texturePack, blendMap);
+        Terrain terrain = new Terrain(modelLoader, texturePack, blendMap);
+        world.getChunk(new ChunkPos(1, 0, 1)).addTerrain(terrain);
+        terrain = new Terrain(modelLoader, texturePack, blendMap);
+        world.getChunk(new ChunkPos(2, 0, 1)).addTerrain(terrain);
+        terrain = new Terrain(modelLoader, texturePack, blendMap);
+        world.getChunk(new ChunkPos(2, 0, 2)).addTerrain(terrain);
+        terrain = new Terrain(modelLoader, texturePack, blendMap);
+        world.getChunk(new ChunkPos(1, 0, 2)).addTerrain(terrain);
 
+        //Generation of all modeled objects
         Random random = new Random();
+        TexturedModel texturedModel = new TexturedModel(OBJFileLoader.loadObjModel("dragon", modelLoader), new ModelTexture(modelLoader.loadTexture("solid")));
+        texturedModel.getTexture().setShineDamper(10);
+        texturedModel.getTexture().setReflectivity(1);
+        new ModeledObject(texturedModel, new Pos3D(256, 200, 256, 0, 180, 0), world);
 
         TexturedModel treeModel = new TexturedModel(OBJFileLoader.loadObjModel("tree", modelLoader), new ModelTexture(modelLoader.loadTexture("tree")));
         for(int i=0; i<200; i++) {
@@ -108,15 +110,17 @@ public class Game {
     }
 
     public void update(float delta) {
-        camera.update(delta);
+        camera.update(delta); //This is necessary, because the camera object is not registered to any chunk in the world.
 
         HashMap<ChunkPos, Chunk> chunkMap = world.getChunkMap();
-        Iterator<Map.Entry<ChunkPos, Chunk>> it = chunkMap.entrySet().iterator();
-        while(it.hasNext()) {
-            Map.Entry<ChunkPos, Chunk> item = it.next();
+        for (Map.Entry<ChunkPos, Chunk> item : chunkMap.entrySet()) {
             ArrayList<GameObject> chunkObjects = item.getValue().getObjects();
-            for(GameObject obj : chunkObjects) {
+            for (GameObject obj : chunkObjects) {
                 obj.update(delta);
+            }
+            ArrayList<Terrain> terrains = item.getValue().getTerrains();
+            for(Terrain terrain : terrains) {
+
             }
         }
 
@@ -133,11 +137,11 @@ public class Game {
             for(GameObject obj : chunkObjects) {
                 obj.render(delta);
             }
+            ArrayList<Terrain> terrains = item.getValue().getTerrains();
+            for(Terrain terrain : terrains) {
+                renderer.processTerrainChunk(terrain);
+            }
         }
-        renderer.processTerrainChunk(terrainChunk);
-        renderer.processTerrainChunk(terrainChunk2);
-        renderer.processTerrainChunk(terrainChunk3);
-        renderer.processTerrainChunk(terrainChunk4);
         renderer.render(light, camera);
         DisplayManager.updateDisplay();
     }

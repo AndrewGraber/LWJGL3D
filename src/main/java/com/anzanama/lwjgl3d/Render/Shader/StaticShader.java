@@ -1,6 +1,6 @@
 package com.anzanama.lwjgl3d.Render.Shader;
 
-import com.anzanama.lwjgl3d.Render.Light;
+import com.anzanama.lwjgl3d.Render.Lighting.Light;
 import com.anzanama.lwjgl3d.Util.Config;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;

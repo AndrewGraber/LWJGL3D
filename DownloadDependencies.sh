@@ -15,6 +15,7 @@ printf "\n${BLUE}EXTRACTING LWJGL${NC}\n\n"
 unzip lwjgl-2.9.1.zip
 mv ./lwjgl-2.9.1/jar/lwjgl.jar ./
 mv ./lwjgl-2.9.1/jar/lwjgl_util.jar ./
+mv ./lwjgl-2.9.1/jar/jinput.jar ./
 mv ./lwjgl-2.9.1/native/ ./
 printf "\n${BLUE}CLEANING UP${NC}\n\n"
 rm -rf ./lwjgl-2.9.1
