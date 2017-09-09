@@ -40,7 +40,7 @@ public class Game {
     public void initialize() {
         //Backend Object Intitialization
         world = WorldProvider.createNewWorld("world");
-        playerInput = new ControllerDS4Input(Controllers.getController(0));
+        //playerInput = new ControllerDS4Input(Controllers.getController(0));
         cameraInput = new KeyboardInput();
 
         //Rendering Object Initialization
@@ -99,7 +99,7 @@ public class Game {
             new ModeledObject(flowerModel, pos, world);
         }
 
-        new ControlledObject(texturedModel, playerInput, new Pos3D(256, 0, 256, 0, 0, 0, 0.5f), world);
+        //new ControlledObject(texturedModel, playerInput, new Pos3D(256, 0, 256, 0, 0, 0, 0.5f), world);
     }
 
     public void loop() {
