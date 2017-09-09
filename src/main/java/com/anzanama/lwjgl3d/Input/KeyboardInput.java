@@ -9,6 +9,9 @@ public class KeyboardInput extends Input {
 
     @Override
     public void updateInput() {
+        axes.put("button_1", Mouse.isButtonDown(1) ? 1.0f : 0.0f);
+        axes.put("button_0", Mouse.isButtonDown(0) ? 1.0f : 0.0f);
+
         if(Keyboard.isKeyDown(Keyboard.KEY_W)) {
             axes.put("move", 1.0f);
         } else if(Keyboard.isKeyDown(Keyboard.KEY_S)) {
@@ -25,9 +28,23 @@ public class KeyboardInput extends Input {
         axes.put("sneak", Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? 1.0f : 0.0f);
 
         int temp = Mouse.getDX();
-        axes.put("look_x", (float)temp);
+        if(getAxis("button_0") > 0) {
+            axes.put("rotate", (float)temp);
+            axes.put("look_x", 0.0f);
+        } else {
+            axes.put("look_x", -(float)temp);
+            axes.put("rotate", 0.0f);
+        }
         temp = Mouse.getDY();
-        axes.put("look_y", (float)temp);
+        if(getAxis("button_1") > 0) {
+            axes.put("pitch", (float)temp);
+            axes.put("look_y", 0.0f);
+        } else {
+            axes.put("look_y", (float) temp);
+            axes.put("pitch", 0.0f);
+        }
+
+        axes.put("zoom", (float)Mouse.getDWheel());
     }
 
     @Override

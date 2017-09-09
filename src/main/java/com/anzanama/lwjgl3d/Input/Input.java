@@ -15,6 +15,9 @@ public abstract class Input {
         axes.put("sneak", 0.0f);
         axes.put("look_x", 0.0f);
         axes.put("look_y", 0.0f);
+        axes.put("zoom", 0.0f);
+        axes.put("button_1", 0.0f);
+        axes.put("pitch", 0.0f);
     }
 
     public abstract void updateInput();

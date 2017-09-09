@@ -1,5 +1,6 @@
 package com.anzanama.lwjgl3d;
 
+import com.anzanama.lwjgl3d.Game.ExampleGame;
 import com.anzanama.lwjgl3d.Game.Game;
 import com.anzanama.lwjgl3d.Render.DisplayManager;
 import com.anzanama.lwjgl3d.Util.Config;
@@ -11,6 +12,14 @@ import org.lwjgl.input.Mouse;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
+/**
+ * The main entry point for the program. Theoretically, the only thing you should ever need to change in here is the
+ * game. To make your game run, you'll just make a class that extends {@link Game} and change the line that instantiates
+ * the game object in {@link #main(String[])}
+ *
+ * @author Andrew Graber
+ * @version 9/8/2017
+ */
 public class Main {
     private static Game game;
     private static String OS = System.getProperty("os.name").toLowerCase();
@@ -45,7 +54,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        game = new Game();
+        game = new ExampleGame();
         game.initialize();
         game.loop();
         game.shutdown();
