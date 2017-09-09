@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.anzanama.lwjgl3d.Render.Model.Data.ModelData;
+import com.anzanama.lwjgl3d.Render.Model.Data.Vertex;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 

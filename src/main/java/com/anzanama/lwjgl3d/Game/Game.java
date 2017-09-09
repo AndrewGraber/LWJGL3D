@@ -1,15 +1,23 @@
 package com.anzanama.lwjgl3d.Game;
 
 import com.anzanama.lwjgl3d.GameObject.*;
+import com.anzanama.lwjgl3d.Game.GameObject.CameraObject;
+import com.anzanama.lwjgl3d.Game.GameObject.ControlledObject;
+import com.anzanama.lwjgl3d.Game.GameObject.GameObject;
+import com.anzanama.lwjgl3d.Game.GameObject.ModeledObject;
+import com.anzanama.lwjgl3d.Input.ControllerDS4Input;
+import com.anzanama.lwjgl3d.Input.Input;
+import com.anzanama.lwjgl3d.Input.KeyboardInput;
 import com.anzanama.lwjgl3d.Render.DisplayManager;
-import com.anzanama.lwjgl3d.Render.GameRenderer;
-import com.anzanama.lwjgl3d.Render.Light;
+import com.anzanama.lwjgl3d.Render.Renderer.GameRenderer;
+import com.anzanama.lwjgl3d.Render.Lighting.Light;
 import com.anzanama.lwjgl3d.Render.Model.*;
-import com.anzanama.lwjgl3d.World.Chunk;
-import com.anzanama.lwjgl3d.World.Position.ChunkPos;
-import com.anzanama.lwjgl3d.World.World;
-import com.anzanama.lwjgl3d.World.WorldProvider;
+import com.anzanama.lwjgl3d.Game.World.Chunk.Chunk;
+import com.anzanama.lwjgl3d.Game.World.Position.ChunkPos;
+import com.anzanama.lwjgl3d.Game.World.World;
+import com.anzanama.lwjgl3d.Game.World.WorldProvider;
 import org.lwjgl.opengl.Display;
+import java.util.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,12 +108,14 @@ public abstract class Game {
      */
     public void update(float delta) {
         HashMap<ChunkPos, Chunk> chunkMap = world.getChunkMap();
-        Iterator<Map.Entry<ChunkPos, Chunk>> it = chunkMap.entrySet().iterator();
-        while(it.hasNext()) {
-            Map.Entry<ChunkPos, Chunk> item = it.next();
+        for (Map.Entry<ChunkPos, Chunk> item : chunkMap.entrySet()) {
             ArrayList<GameObject> chunkObjects = item.getValue().getObjects();
-            for(GameObject obj : chunkObjects) {
+            for (GameObject obj : chunkObjects) {
                 obj.update(delta);
+            }
+            ArrayList<Terrain> terrains = item.getValue().getTerrains();
+            for(Terrain terrain : terrains) {
+
             }
         }
 
@@ -134,6 +144,10 @@ public abstract class Game {
             ArrayList<GameObject> chunkObjects = item.getValue().getObjects();
             for(GameObject obj : chunkObjects) {
                 obj.render(delta);
+            }
+            ArrayList<Terrain> terrains = item.getValue().getTerrains();
+            for(Terrain terrain : terrains) {
+                renderer.processTerrainChunk(terrain);
             }
         }
 

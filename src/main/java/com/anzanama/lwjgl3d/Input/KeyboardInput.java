@@ -1,11 +1,9 @@
 package com.anzanama.lwjgl3d.Input;
 
 import com.anzanama.lwjgl3d.Util.Config;
-import com.anzanama.lwjgl3d.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-
-import java.util.HashMap;
 
 public class KeyboardInput extends Input {
 

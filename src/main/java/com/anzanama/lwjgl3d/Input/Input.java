@@ -1,6 +1,6 @@
 package com.anzanama.lwjgl3d.Input;
 
-import com.anzanama.lwjgl3d.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
 
 import java.util.HashMap;
 
