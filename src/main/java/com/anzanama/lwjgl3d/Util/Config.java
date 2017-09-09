@@ -91,6 +91,18 @@ public class Config {
                     "#The Sensitivity of the controller joysticks (Default: 1.0f)\n" +
                     "f:controller_sensitivity=1.0f\n" +
                     "\n" +
+                    "#The distance one scroll of the mouse wheel (or controller zoom)\n" +
+                    "#moves the camera (Default: 0.1f)\n" +
+                    "f:zoom_distance=0.1f\n" +
+                    "\n" +
+                    "#The amount (in degrees) to change pitch of follow camera by for each\n" +
+                    "#pixel moved (Default: 0.1f)\n" +
+                    "f:pitch_change=0.1f\n" +
+                    "\n" +
+                    "#The amount (in degrees) to change rotation of follow camera around player\n" +
+                    "#for each pixel moved (Default: 0.3f)\n" +
+                    "f:rotate_change=0.3f\n" +
+                    "\n" +
                     "#The Field of View of the camera (Default: 70f)\n" +
                     "f:camera_fov=70f\n" +
                     "\n" +
@@ -101,7 +113,10 @@ public class Config {
                     "f:render_distance=1000f\n" +
                     "\n" +
                     "#The Movement speed of the camera (Default: 0.1f)\n" +
-                    "f:move_speed=0.1f\n" +
+                    "f:camera_move_speed=0.1f\n" +
+                    "\n" +
+                    "#The Movement speed of the player (Default: 0.2f)\n" +
+                    "f:player_move_speed=0.2f\n" +
                     "\n" +
                     "#The ambient light (brightness) in the world. This is the\n" +
                     "#amount of light that will show when no light source is in\n" +
