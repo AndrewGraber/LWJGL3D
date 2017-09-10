@@ -1,9 +1,11 @@
 package com.anzanama.lwjgl3d.GameObject;
 
+import com.anzanama.lwjgl3d.Game.GameObject.CameraObject;
+import com.anzanama.lwjgl3d.Game.GameObject.GameObject;
 import com.anzanama.lwjgl3d.Input.Input;
 import com.anzanama.lwjgl3d.Util.Config;
-import com.anzanama.lwjgl3d.World.Position.Pos3D;
-import com.anzanama.lwjgl3d.World.World;
+import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.Game.World.World;
 import org.lwjgl.input.Mouse;
 
 public class FollowCameraObject extends CameraObject {
