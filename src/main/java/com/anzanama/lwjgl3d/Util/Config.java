@@ -134,7 +134,10 @@ public class Config {
                     "#(Default: 0.7f, 0.9f, 1.0f)\n" +
                     "f:sky_red=0.7f\n" +
                     "f:sky_green=0.9f\n" +
-                    "f:sky_blue=1.0f");
+                    "f:sky_blue=1.0f\n" +
+                    "\n" +
+                    "#The mipmapping level (just leave if you don't understand) (Default: -0.4f)\n" +
+                    "f:mipmap_level=-0.4f\n");
             writer.flush();
             writer.close();
         } catch (IOException e) {

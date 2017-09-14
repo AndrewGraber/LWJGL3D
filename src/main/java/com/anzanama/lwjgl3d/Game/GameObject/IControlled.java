@@ -1,4 +1,4 @@
-package com.anzanama.lwjgl3d.GameObject;
+package com.anzanama.lwjgl3d.Game.GameObject;
 
 import com.anzanama.lwjgl3d.Input.Input;
 

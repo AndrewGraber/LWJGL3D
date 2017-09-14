@@ -3,6 +3,7 @@ package com.anzanama.lwjgl3d.Render.Shader;
 import com.anzanama.lwjgl3d.Render.Lighting.Light;
 import com.anzanama.lwjgl3d.Util.Config;
 import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
 
 public class TerrainShader extends Shader {
     private static final String VERTEX_FILE = "src/main/resources/shaders/terrainShader.vert";
@@ -23,6 +24,7 @@ public class TerrainShader extends Shader {
     private int location_gTexture;
     private int location_bTexture;
     private int location_blendMap;
+    private int location_skyColor;
 
     public TerrainShader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
@@ -52,6 +54,7 @@ public class TerrainShader extends Shader {
         location_gTexture = super.getUniformLocation("gTexture");
         location_bTexture = super.getUniformLocation("bTexture");
         location_blendMap = super.getUniformLocation("blendMap");
+        location_skyColor = super.getUniformLocation("skyColor");
     }
 
     public void connectTextureUnits() {
@@ -68,7 +71,7 @@ public class TerrainShader extends Shader {
     }
 
     public void loadSkyColor(float r, float g, float  b) {
-
+        super.loadVector(location_skyColor, new Vector3f(r,g,b));
     }
 
     public void loadTransformationMatrix(Matrix4f matrix) {

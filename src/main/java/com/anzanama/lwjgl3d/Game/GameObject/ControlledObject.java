@@ -1,6 +1,5 @@
 package com.anzanama.lwjgl3d.Game.GameObject;
 
-import com.anzanama.lwjgl3d.GameObject.IControlled;
 import com.anzanama.lwjgl3d.Input.Input;
 import com.anzanama.lwjgl3d.Render.Model.TexturedModel;
 import com.anzanama.lwjgl3d.Util.Config;
@@ -53,12 +52,16 @@ public class ControlledObject extends ModeledObject implements IControlled {
     }
 
     public void move(float amt) {
-        pos.getLoc().addZ((float)(-amt * Math.sin(Math.toRadians(pos.getRot().getYaw()))));
-        pos.getLoc().addX((float)(-amt * Math.cos(Math.toRadians(pos.getRot().getYaw()))));
+        float dx = (float)(amt * Math.sin(Math.toRadians(pos.getRot().getYaw())));
+        float dz = (float)(amt * Math.cos(Math.toRadians(pos.getRot().getYaw())));
+        pos.getLoc().addX(dx);
+        pos.getLoc().addZ(dz);
     }
 
     public void strafe(float amt) {
-        pos.getLoc().addZ((float)(amt * Math.sin(Math.toRadians(pos.getRot().getYaw()))));
-        pos.getLoc().addX((float)(amt * Math.cos(Math.toRadians(pos.getRot().getYaw()))));
+        float dx = (float)(amt * Math.sin(Math.toRadians(pos.getRot().getYaw()-90)));
+        float dz = (float)(amt * Math.cos(Math.toRadians(pos.getRot().getYaw()-90)));
+        pos.getLoc().addX(dx);
+        pos.getLoc().addZ(dz);
     }
 }

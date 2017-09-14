@@ -1,9 +1,9 @@
-package com.anzanama.lwjgl3d.GameObject;
+package com.anzanama.lwjgl3d.Game.GameObject;
 
 import com.anzanama.lwjgl3d.Input.Input;
 import com.anzanama.lwjgl3d.Util.Config;
-import com.anzanama.lwjgl3d.World.Position.Pos3D;
-import com.anzanama.lwjgl3d.World.World;
+import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.Game.World.World;
 
 public class FreeCameraObject extends CameraObject implements IControlled {
     protected Input input;

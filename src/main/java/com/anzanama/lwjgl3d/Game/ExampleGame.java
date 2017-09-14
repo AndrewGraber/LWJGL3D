@@ -1,21 +1,21 @@
 package com.anzanama.lwjgl3d.Game;
 
-import com.anzanama.lwjgl3d.GameObject.ControlledObject;
-import com.anzanama.lwjgl3d.GameObject.FollowCameraObject;
-import com.anzanama.lwjgl3d.GameObject.GameObject;
-import com.anzanama.lwjgl3d.GameObject.ModeledObject;
+import com.anzanama.lwjgl3d.Game.GameObject.ControlledObject;
+import com.anzanama.lwjgl3d.Game.GameObject.FollowCameraObject;
+import com.anzanama.lwjgl3d.Game.GameObject.GameObject;
+import com.anzanama.lwjgl3d.Game.GameObject.ModeledObject;
 import com.anzanama.lwjgl3d.Input.Input;
 import com.anzanama.lwjgl3d.Input.KeyboardInput;
-import com.anzanama.lwjgl3d.Render.Light;
+import com.anzanama.lwjgl3d.Render.Lighting.Light;
 import com.anzanama.lwjgl3d.Render.Model.OBJFileLoader;
 import com.anzanama.lwjgl3d.Render.Model.RawModel;
 import com.anzanama.lwjgl3d.Render.Model.TexturedModel;
 import com.anzanama.lwjgl3d.Render.Texture.ModelTexture;
 import com.anzanama.lwjgl3d.Render.Texture.TerrainTexture;
 import com.anzanama.lwjgl3d.Render.Texture.TerrainTexturePack;
-import com.anzanama.lwjgl3d.World.Position.ChunkPos;
-import com.anzanama.lwjgl3d.World.Position.Pos3D;
-import com.anzanama.lwjgl3d.World.TerrainChunk;
+import com.anzanama.lwjgl3d.Game.World.Position.ChunkPos;
+import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
+import com.anzanama.lwjgl3d.Game.World.Terrain.Terrain;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.*;
@@ -27,7 +27,7 @@ import java.util.*;
  * @version 9/8/2017
  */
 public class ExampleGame extends Game {
-    private TerrainChunk terrainChunk, terrainChunk2, terrainChunk3, terrainChunk4;
+    private Terrain terrain;
 
     @Override
     public void initialize() {
@@ -36,8 +36,8 @@ public class ExampleGame extends Game {
         Input input = new KeyboardInput();
         light = new Light(new Vector3f(256, 200, 256), new Vector3f(1, 1, 1));
 
-        RawModel model = OBJFileLoader.loadObjModel("dragon", modelLoader);
-        ModelTexture texture = new ModelTexture(modelLoader.loadTexture("solid"));
+        RawModel model = OBJFileLoader.loadObjModel("person", modelLoader);
+        ModelTexture texture = new ModelTexture(modelLoader.loadTexture("playerTexture"));
         texture.setShineDamper(10);
         texture.setReflectivity(1);
         TexturedModel texturedModel = new TexturedModel(model, texture);
@@ -56,10 +56,14 @@ public class ExampleGame extends Game {
         TerrainTexture blendMap = new TerrainTexture(modelLoader.loadTexture("blendMap"));
         //*******************************************************************************************************
 
-        terrainChunk = new TerrainChunk(new ChunkPos(1, 0, 1), modelLoader, texturePack, blendMap);
-        terrainChunk2 = new TerrainChunk(new ChunkPos(2, 0, 1), modelLoader, texturePack, blendMap);
-        terrainChunk3 = new TerrainChunk(new ChunkPos(2, 0, 2), modelLoader, texturePack, blendMap);
-        terrainChunk4 = new TerrainChunk(new ChunkPos(1, 0, 2), modelLoader, texturePack, blendMap);
+        terrain = new Terrain(modelLoader, texturePack, blendMap, "heightmap");
+        world.getChunk(new ChunkPos(0, 0, 0)).addTerrain(terrain);
+        terrain = new Terrain(modelLoader, texturePack, blendMap, "heightmap");
+        world.getChunk(new ChunkPos(1, 0, 0)).addTerrain(terrain);
+        terrain = new Terrain(modelLoader, texturePack, blendMap, "heightmap");
+        world.getChunk(new ChunkPos(1, 0, 1)).addTerrain(terrain);
+        terrain = new Terrain(modelLoader, texturePack, blendMap, "heightmap");
+        world.getChunk(new ChunkPos(0, 0, 1)).addTerrain(terrain);
 
         Random random = new Random();
 
@@ -86,15 +90,5 @@ public class ExampleGame extends Game {
             Pos3D pos = new Pos3D(random.nextFloat()*512, 0, random.nextFloat()*512, 0, random.nextFloat()*360, 0);
             new ModeledObject(flowerModel, pos, world);
         }
-    }
-
-    @Override
-    public void render(float delta) {
-        renderer.processTerrainChunk(terrainChunk);
-        renderer.processTerrainChunk(terrainChunk2);
-        renderer.processTerrainChunk(terrainChunk3);
-        renderer.processTerrainChunk(terrainChunk4);
-
-        super.render(delta);
     }
 }

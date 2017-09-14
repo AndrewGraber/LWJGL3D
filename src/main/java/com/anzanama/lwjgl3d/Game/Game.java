@@ -1,10 +1,6 @@
 package com.anzanama.lwjgl3d.Game;
 
-import com.anzanama.lwjgl3d.GameObject.*;
-import com.anzanama.lwjgl3d.Game.GameObject.CameraObject;
-import com.anzanama.lwjgl3d.Game.GameObject.ControlledObject;
-import com.anzanama.lwjgl3d.Game.GameObject.GameObject;
-import com.anzanama.lwjgl3d.Game.GameObject.ModeledObject;
+import com.anzanama.lwjgl3d.Game.GameObject.*;
 import com.anzanama.lwjgl3d.Input.ControllerDS4Input;
 import com.anzanama.lwjgl3d.Input.Input;
 import com.anzanama.lwjgl3d.Input.KeyboardInput;
@@ -16,13 +12,10 @@ import com.anzanama.lwjgl3d.Game.World.Chunk.Chunk;
 import com.anzanama.lwjgl3d.Game.World.Position.ChunkPos;
 import com.anzanama.lwjgl3d.Game.World.World;
 import com.anzanama.lwjgl3d.Game.World.WorldProvider;
+import com.anzanama.lwjgl3d.Game.World.Terrain.Terrain;
+
 import org.lwjgl.opengl.Display;
 import java.util.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * This is the main class of the game. It is where you will base all of the logic and processes of your game off of.

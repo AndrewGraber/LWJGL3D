@@ -1,10 +1,8 @@
 package com.anzanama.lwjgl3d.Render.Model;
 
+import com.anzanama.lwjgl3d.Util.Config;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
+import org.lwjgl.opengl.*;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
@@ -36,6 +34,9 @@ public class ModelLoader {
         Texture texture = null;
         try {
             texture = TextureLoader.getTexture("PNG", new FileInputStream("src/main/resources/textures/" + fileName + ".png"));
+            GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
+            GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
+            GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL14.GL_TEXTURE_LOD_BIAS, Config.getFloat("mipmap_level"));
         } catch(FileNotFoundException e) {
             e.printStackTrace();
         } catch(IOException e) {
