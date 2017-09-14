@@ -32,7 +32,7 @@ public class KeyboardInput extends Input {
             axes.put("rotate", (float)temp);
             axes.put("look_x", 0.0f);
         } else {
-            axes.put("look_x", -(float)temp);
+            axes.put("look_x", (float)temp);
             axes.put("rotate", 0.0f);
         }
         temp = Mouse.getDY();

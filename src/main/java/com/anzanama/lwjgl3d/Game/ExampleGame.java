@@ -1,9 +1,7 @@
 package com.anzanama.lwjgl3d.Game;
 
-import com.anzanama.lwjgl3d.Game.GameObject.ControlledObject;
-import com.anzanama.lwjgl3d.Game.GameObject.FollowCameraObject;
-import com.anzanama.lwjgl3d.Game.GameObject.GameObject;
-import com.anzanama.lwjgl3d.Game.GameObject.ModeledObject;
+import com.anzanama.lwjgl3d.Game.GameObject.*;
+import com.anzanama.lwjgl3d.Game.World.Terrain.Terrain;
 import com.anzanama.lwjgl3d.Input.Input;
 import com.anzanama.lwjgl3d.Input.KeyboardInput;
 import com.anzanama.lwjgl3d.Render.Lighting.Light;
@@ -15,7 +13,7 @@ import com.anzanama.lwjgl3d.Render.Texture.TerrainTexture;
 import com.anzanama.lwjgl3d.Render.Texture.TerrainTexturePack;
 import com.anzanama.lwjgl3d.Game.World.Position.ChunkPos;
 import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
-import com.anzanama.lwjgl3d.Game.World.Terrain.Terrain;
+
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.*;
@@ -27,7 +25,6 @@ import java.util.*;
  * @version 9/8/2017
  */
 public class ExampleGame extends Game {
-    private Terrain terrain;
 
     @Override
     public void initialize() {
@@ -43,8 +40,8 @@ public class ExampleGame extends Game {
         TexturedModel texturedModel = new TexturedModel(model, texture);
         new ModeledObject(texturedModel, new Pos3D(256, 200, 256, 0, 180, 0), world);
 
-        GameObject player = new ControlledObject(texturedModel, input, new Pos3D(256, 0, 256, 0, 0, 0, 0.5f), world);
-        camera = new FollowCameraObject(new Pos3D(256, 1, 256), world, input, player, 20, 0);
+        GameObject player = new ModeledObject(texturedModel, new Pos3D(256, 0, 256, 0, 0, 0, 0.5f), world);
+        camera = new FreeCameraObject(new Pos3D(256, 1, 256), world, input);
 
         //*********************************** TERRAIN TEXTURE PACK STUFF ****************************************
         TerrainTexture backgroundTexture = new TerrainTexture(modelLoader.loadTexture("grass"));
@@ -56,7 +53,7 @@ public class ExampleGame extends Game {
         TerrainTexture blendMap = new TerrainTexture(modelLoader.loadTexture("blendMap"));
         //*******************************************************************************************************
 
-        terrain = new Terrain(modelLoader, texturePack, blendMap, "heightmap");
+        Terrain terrain = new Terrain(modelLoader, texturePack, blendMap, "heightmap");
         world.getChunk(new ChunkPos(0, 0, 0)).addTerrain(terrain);
         terrain = new Terrain(modelLoader, texturePack, blendMap, "heightmap");
         world.getChunk(new ChunkPos(1, 0, 0)).addTerrain(terrain);

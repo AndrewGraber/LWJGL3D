@@ -6,6 +6,9 @@ import com.anzanama.lwjgl3d.Game.World.World;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 
+/**
+ * A hard-coded cube object used for testing and debugging. Will probably eventually be removed.
+ */
 public class TestCubeObject extends EmptyObject {
 
     public TestCubeObject(Pos3D pos, World world) {

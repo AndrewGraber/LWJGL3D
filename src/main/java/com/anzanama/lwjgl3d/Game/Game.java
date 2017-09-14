@@ -1,9 +1,7 @@
 package com.anzanama.lwjgl3d.Game;
 
 import com.anzanama.lwjgl3d.Game.GameObject.*;
-import com.anzanama.lwjgl3d.Input.ControllerDS4Input;
-import com.anzanama.lwjgl3d.Input.Input;
-import com.anzanama.lwjgl3d.Input.KeyboardInput;
+import com.anzanama.lwjgl3d.Game.World.Terrain.Terrain;
 import com.anzanama.lwjgl3d.Render.DisplayManager;
 import com.anzanama.lwjgl3d.Render.Renderer.GameRenderer;
 import com.anzanama.lwjgl3d.Render.Lighting.Light;
@@ -12,7 +10,6 @@ import com.anzanama.lwjgl3d.Game.World.Chunk.Chunk;
 import com.anzanama.lwjgl3d.Game.World.Position.ChunkPos;
 import com.anzanama.lwjgl3d.Game.World.World;
 import com.anzanama.lwjgl3d.Game.World.WorldProvider;
-import com.anzanama.lwjgl3d.Game.World.Terrain.Terrain;
 
 import org.lwjgl.opengl.Display;
 import java.util.*;
@@ -108,7 +105,7 @@ public abstract class Game {
             }
             ArrayList<Terrain> terrains = item.getValue().getTerrains();
             for(Terrain terrain : terrains) {
-
+                renderer.processTerrainChunk(terrain);
             }
         }
 

@@ -1,5 +1,7 @@
 package com.anzanama.lwjgl3d.Game.GameObject;
 
+import com.anzanama.lwjgl3d.Game.GameObject.CameraObject;
+import com.anzanama.lwjgl3d.Game.GameObject.GameObject;
 import com.anzanama.lwjgl3d.Input.Input;
 import com.anzanama.lwjgl3d.Util.Config;
 import com.anzanama.lwjgl3d.Game.World.Position.Pos3D;
