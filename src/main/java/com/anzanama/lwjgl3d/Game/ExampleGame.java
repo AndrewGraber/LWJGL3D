@@ -33,7 +33,7 @@ public class ExampleGame extends Game {
         Input input = new KeyboardInput();
         light = new Light(new Vector3f(256, 200, 256), new Vector3f(1, 1, 1));
 
-        RawModel model = OBJFileLoader.loadObjModel("person", modelLoader);
+        RawModel model = OBJFileLoader.loadObjModel("dragon", modelLoader);
         ModelTexture texture = new ModelTexture(modelLoader.loadTexture("playerTexture"));
         texture.setShineDamper(10);
         texture.setReflectivity(1);
