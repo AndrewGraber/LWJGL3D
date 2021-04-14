@@ -1,5 +1,5 @@
 # LWJGL3D
-A Work-in-progress 3D Game Framework Build with LWJGL 2.9.1 and the Slick-Util library in Java. Currently, there isn't much here, but I am constantly working on it and updating, adding new things, as well as improvements to old ones.
+A Work-in-progress 3D Game Framework built with LWJGL 2.9.1 and the Slick-Util library in Java. Currently, there isn't much here, but I am constantly working on it and updating, adding new things, as well as improvements to old ones.
 
 If you find any issues with anything here, make sure to post them in the issues tab (unless there's already a post there for your issue). I greatly appreciate any feedback/criticism/help I can get, so don't be afraid to dish it out.
 
