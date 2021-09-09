@@ -1,7 +1,52 @@
 # LWJGL3D
-A Work-in-progress 3D Game Framework built with LWJGL 2.9.1 and the Slick-Util library in Java. Currently, there isn't much here, but I am constantly working on it and updating, adding new things, as well as improvements to old ones.
+An abandoned from-scratch 3D Game Framework I built with LWJGL 2.9.1 and the Slick-Util library in Java. The idea behind this framework was to create a game development platform like Unity or Godot for coders. I am interested in game development, but I find myself frustrated with the amount of time I spend fiddling around with GUIs in those programs, when I really want to be writing code.
 
-If you find any issues with anything here, make sure to post them in the issues tab (unless there's already a post there for your issue). I greatly appreciate any feedback/criticism/help I can get, so don't be afraid to dish it out.
+This engine was designed to be a solid launching off point for developing games without having to deal with GUIs. I eventually plan to go back and start from scratch to create a framework that can handle multiple graphics engines (OpenGL, Vulkan, maybe DirectX) in C++, but I haven't had time for that yet.
+
+Features that were implemented before the project was abandoned:
+* Model System
+  * Supports models from .obj files, as well as raw models created through a passed VAO (vertex and other model data)
+  * Model system is robust and hierarchical, so support for other model types can easily be added
+  * Supports textured models
+* Custom rendering system built from scratch using the LWJGL OpenGL bindings
+* Lighting system
+  * Works in tandem with model and terrain systems to provide realistic reflections, lighting, and shadows
+  * Supports colored lights
+* Configuration System
+  * Custom configuration system which allows games to add options for their players to customize
+  * Supports boolean, integer, and float values
+  * Will automatically generate a default configuration file if one does not exist or is missing
+* GameObject System
+  * The bread and butter of the framework. Everything in the world is a GameObject of some kind
+  * The main game loops allow every game object to hook into the update() and render() functions so they can control themselves.
+  * Built in support for attaching Models to GameObjects and rendering is automatically handled
+  * Camera system that allows for free cameras the player can control directly, or follow cameras that will follow a GameObject
+* World System
+  * The world is automatically broken up into "chunks" which contain GameObjects
+  * The engine's main game loop runs an update on every chunk that is loaded, which in turn causes GameObjects in the chunk to update
+  * I ran into an issue here where GameObjects that move often need to be transitioned between chunks during an update.
+  * To combat the above, I added the WorldChange system, which allows GameObjects to schedule WorldChanges during their update phase to move between chunks
+  * This somewhat complicates logic, as GameObjects have to keep in mind that they cannot technically belong to a new Chunk until the next update phase
+  * I plan to rework this a bit when I recreate the engine
+* Terrain System
+  * Custom terrain system that generates terrain based on provided heightmaps
+  * Heightmaps are black and white and use the greyscale to distinguish heights
+  * Supports textured terrain through TerrainTexturePacks
+  * Terrain Texture Packs consist of up to 4 textures that are applied to terrain based on a given texture mask
+  * The mask is a .png file which uses the r, g, b, a channels to distinguish between textures. This allows for transitions between textures and overlaying textures.
+* Input System
+  * Custom modular input system that allows games to add "Axes" which allow for additional inputs
+  * Built-in support for Keyboard and Mouse, as well as DualShock 4 controllers
+  * System allows for implementation of Input to any device the dev desires
+* Full shader support that allows for custom shaders
+* Inlcuded Gradle setup that can handle dependencies
+  * Added task to automatically set up native files for LWJGL based on user's operating system
+
+All of the systems in this engine/framework were designed to be modular and extensible. Every part of this project implements MVC principles, so the same Input mechanics can be used for AI, networking won't require a full rewrite if implemented, etc.
+
+The engine is not quite functional to the point you could create a full game, as it doesn't have a physics engine. However, it is in a good enough state that you can put together a world of arbitrary size and tour it.
+
+If you find any issues with anything here, you can post them in the Issue tracker. However, I make no guarantees on whether I'll see them, as I am no longer actively working on this project and plan to rebuild it from scratch in the future.
 
 ## Getting this Repo Working on Your Computer
 This project is built upon LWJGL 2.9.1 which you can download [here](https://sourceforge.net/projects/java-game-lib/files/Official%20Releases/LWJGL%202.9.1/) and SlickUtil which can be found [here](http://slick.ninjacave.com/slick-util/). You only need the lwjgl-2.9.1.zip, but you can download the others if you want. (TODO: make a script/gradle task to handle this). 
