@@ -77,7 +77,7 @@ If you'd like to help out with the project, feel free to submit a pull request. 
 ### Edit 12/14/2023
 I was just looking through my repositories and noticed I never put a License in this one. This project is completely free and open-source, and falls under the MIT License as stated below
 
-##License
+## License
 Copyright 2023 Andrew C. Graber
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
